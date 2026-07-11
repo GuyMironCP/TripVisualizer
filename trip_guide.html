@@ -131,11 +131,101 @@ html, body { height:100%; font-family:'Segoe UI', system-ui, sans-serif; overflo
              text-decoration:none !important; transition:opacity .15s; }
 .pop-link:hover { opacity:.85; }
 
-@media(max-width:700px){
-  #content{flex-direction:column;}
-  #sidebar{width:100%;min-width:0;height:45vh;}
-  #map{height:55vh;}
+/* ─── Mobile responsive ─────────────────────────────── */
+@media(max-width:768px){
+  #topbar { padding:7px 10px; flex-wrap:wrap; gap:8px; }
+  #topbar h1 { font-size:13px; }
+  .stats { gap:10px; }
+  .stat b { font-size:15px; }
+  #sidebar { display:none !important; }
+  #content { flex:1; }
+  #map { flex:1; height:100%; }
+  #app { padding-bottom:56px; }
+  .btn-mode { font-size:10px; padding:5px 10px; }
+  #btn-cal-desktop { display:none; }
+  .act-name { font-size:12px; }
+  .act-note { font-size:10px; }
 }
+
+/* ─── Tab bar (mobile only) ─────────────────────────── */
+#tab-bar {
+  display:none;
+  position:fixed; bottom:0; left:0; width:100%; z-index:2000;
+  background:var(--forest-dark); border-top:2px solid rgba(255,255,255,.15);
+  height:56px; flex-shrink:0;
+}
+@media(max-width:768px){ #tab-bar { display:flex; } }
+.tab-btn {
+  flex:1; background:none; border:none; color:rgba(255,255,255,.6);
+  font-size:22px; cursor:pointer; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:2px; transition:all .18s;
+}
+.tab-btn.on { color:#fff; background:rgba(255,255,255,.12); }
+.tab-btn .tab-lbl { font-size:10px; }
+
+/* ─── Calendar grid view ────────────────────────────── */
+#cal-view { flex:1; overflow:hidden; flex-direction:column; background:var(--bg); }
+#cal-grid {
+  display:flex; overflow-x:auto; height:100%;
+  padding:8px; gap:6px;
+}
+#cal-grid::-webkit-scrollbar { height:4px; }
+#cal-grid::-webkit-scrollbar-thumb { background:#b0c8b0; border-radius:2px; }
+.cal-col {
+  min-width:130px; max-width:140px; flex-shrink:0;
+  display:flex; flex-direction:column; gap:4px;
+}
+.cal-head {
+  background:var(--forest); color:#fff;
+  border-radius:8px; padding:6px 8px; text-align:center;
+  font-size:11px; font-weight:700; cursor:pointer; line-height:1.4;
+}
+.cal-head:hover { background:var(--forest-dark); }
+.cal-hotel {
+  background:#e3f2fd; border-radius:6px;
+  padding:4px 6px; font-size:9px; color:#1565c0; text-align:center; cursor:pointer;
+}
+.cal-act {
+  border-radius:6px; padding:5px 6px; font-size:10px; font-weight:600;
+  cursor:pointer; border-left:3px solid transparent;
+  line-height:1.3; transition:transform .12s;
+}
+.cal-act:hover { transform:scale(1.02); box-shadow:0 2px 6px rgba(0,0,0,.12); }
+.cal-act.nature     { background:#e8f5e9; border-color:var(--c-nature);  color:#1b5e20; }
+.cal-act.lake       { background:#e3f2fd; border-color:var(--c-lake);    color:#01579b; }
+.cal-act.attraction { background:#fff3e0; border-color:var(--c-attract); color:#bf360c; }
+.cal-act.city       { background:#ede7f6; border-color:var(--c-city);    color:#311b92; }
+.cal-act.hotel      { background:#e8eaf6; border-color:var(--c-hotel);   color:#1a237e; }
+.cal-act.flight     { background:#f3e5f5; border-color:var(--c-flight);  color:#4a148c; }
+.cal-act.drive      { background:#eceff1; border-color:var(--c-drive);   color:#37474f; }
+
+/* ─── Activity detail sheet ─────────────────────────── */
+#detail-sheet {
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,.45);
+  z-index:3000; align-items:flex-end; justify-content:center;
+}
+#detail-sheet.open { display:flex; }
+#detail-body {
+  background:#fff; border-radius:16px 16px 0 0;
+  width:100%; max-width:600px; max-height:80vh;
+  overflow-y:auto; padding:20px; direction:rtl;
+  animation:slideUp .25s ease;
+}
+@keyframes slideUp { from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;} }
+#detail-close {
+  float:left; background:none; border:none; font-size:20px;
+  cursor:pointer; color:#888; padding:0 4px; line-height:1;
+}
+#detail-content { margin-top:8px; }
+.detail-title { font-size:17px; font-weight:800; color:#1a1a1a; margin-bottom:5px; line-height:1.3; }
+.detail-meta  { font-size:11px; color:#888; margin-bottom:8px; }
+.detail-desc  { font-size:13px; color:#333; line-height:1.7; margin-bottom:10px; }
+.detail-note  { font-size:11px; color:#555; background:#f5f7f5; padding:6px 10px;
+                border-radius:6px; margin-bottom:10px; }
+.detail-link  { display:inline-block; padding:8px 18px; border-radius:8px;
+                color:#fff !important; font-size:12px; font-weight:700;
+                text-decoration:none !important; transition:opacity .15s; margin-top:4px; }
+.detail-link:hover { opacity:.85; }
 
 /* ─── Online/Offline toggle button ─────────────────── */
 .btn-mode { padding:6px 14px; border-radius:20px; border:2px solid rgba(255,255,255,.35);
@@ -202,6 +292,7 @@ html, body { height:100%; font-family:'Segoe UI', system-ui, sans-serif; overflo
     <div class="stat"><b>2</b><s>מלונות</s></div>
   </div>
   <button class="btn-mode" id="btn-online" onclick="toggleOnline()">⚡ מצב אונליין</button>
+  <button class="btn-mode" id="btn-cal-desktop" onclick="switchView(currentView==='cal'?'map':'cal')">📅 לוח שנה</button>
 </div>
 
 <div id="content">
@@ -225,6 +316,32 @@ html, body { height:100%; font-family:'Segoe UI', system-ui, sans-serif; overflo
   <!-- ── Map ──────────────────────────────────────────── -->
   <div id="map"></div>
 </div>
+
+<!-- ── Calendar view ─────────────────────────────────── -->
+<div id="cal-view" style="display:none">
+  <div id="cal-grid"></div>
+</div>
+
+<!-- ── Activity detail sheet ─────────────────────────── -->
+<div id="detail-sheet" onclick="closeDetail()">
+  <div id="detail-body" onclick="event.stopPropagation()">
+    <button id="detail-close" onclick="closeDetail()">✕</button>
+    <div id="detail-content"></div>
+  </div>
+</div>
+
+<!-- ── Mobile tab bar ────────────────────────────────── -->
+<div id="tab-bar">
+  <button class="tab-btn on" id="tbtn-map" onclick="switchView('map')">
+    <span>🗺</span>
+    <span class="tab-lbl">מפה</span>
+  </button>
+  <button class="tab-btn" id="tbtn-cal" onclick="switchView('cal')">
+    <span>📅</span>
+    <span class="tab-lbl">לוח שנה</span>
+  </button>
+</div>
+
 </div>
 
 <script>
@@ -266,6 +383,227 @@ const HOTELS = [
 ];
 
 // ═══════════════════════════════════════════════════════════════════
+//  OPTIONAL ATTRACTIONS (not in schedule)
+// ═══════════════════════════════════════════════════════════════════
+const OPTIONAL = [
+  {
+    id:'opt-0', name:'Rulantica – פארק המים', type:'attraction',
+    category:'פארקי מים ואקווה',
+    coords:[48.2672,7.7233],
+    desc:'Rulantica הוא פארק המים הגדול והחדש ביותר בגרמניה, שנפתח ב-2019 ממש ליד Europa-Park ב-Rust. פארק ענק עם 17 מגלשות מים, ים גלים, בריכות ג\'קוזי, נהר עצלנים ואטמוספרת "עולם צפוני" מקסימה. ניתן לשלב עם יום Europa-Park – הפארקים ממוקמים זה לצד זה וכרטיסים משותפים זמינים.',
+    note:'ממש ליד Europa-Park · Rust · ~55 דק\' ממלון Hofgut Sternen',
+    url:'https://www.rulantica.de/en/', urlLabel:'Rulantica – אתר רשמי'
+  },
+  {
+    id:'opt-1', name:'Hasenhorn Coaster – מגלשות הרים', type:'attraction',
+    category:'מגלשות הרים ואדרנלין',
+    coords:[47.8211,7.9345],
+    desc:'Hasenhorn Rodelbahn בטודנאו – 3 קילומטרים של סיבובים, מהירות וירידה מטורפת בתוך מעמקי היער! עולים ברכבל קרסל ולמעלה מחכות מגלשות הרים מדהימות (Alpine Coaster – קרטים על מסילת פלדה) שיורדים על ההר עם נוף עצום לעמק. אחד הדברים הכי כיפיים ל-family בכל שחורצוואלד. כרטיס כניסה כולל רכבל + סיבוב מגלשות, ואפשר לרדת שוב ושוב. ⚠️ טיפ חשוב: הגיעו מוקדם בבוקר כדי להימנע מתורי ענק שיכולים להגיע לשעה ומעלה! כלול לרוב בכרטיסי הטבות אזוריים.',
+    note:'~20 דק\' מהמלון Hofgut Sternen · הגיעו מוקדם! · סיבובים ברצון',
+    url:'https://www.hasenhorn-rodelbahn.de/en/', urlLabel:'Hasenhorn – אתר רשמי'
+  },
+  {
+    id:'opt-2', name:'Steinwasen Park', type:'attraction',
+    category:'פארקים ומשפחה',
+    coords:[47.9043,7.9344],
+    desc:'Steinwasen Park הוא פארק משפחתי ייחודי בלב יער השחורצוואלד, ליד אוברריד (דרומית לפרייבורג). הפארק משלב חיות בר של האזור (זאבים, דובים, שועלים, אייל, חזיר בר, נשרים) עם אטרקציות פעילות: גשר חבלים תלוי ארוך (ה"Hängebrücke" – ממוקם על מצוק!), אינפרהרד מרתקת, ספינת פיראטים, גלגל-ענק ועוד. פארק שמספק לכל הגילאים – הילדים האקולוגים יאהבו את החיות, ובני הנוער יאהבו את האדרנלין.',
+    note:'~15 דק\' מהמלון Hofgut Sternen · חיות בר + אדרנלין + ילדים',
+    url:'https://www.steinwasen-park.de/', urlLabel:'Steinwasen Park – אתר רשמי'
+  },
+  {
+    id:'opt-3', name:'מסלול מעגלי Höllbach קצר (6 ק"מ)', type:'nature',
+    category:'טיולי טבע',
+    coords:[47.6544,8.0286],
+    desc:'חלופה קצרה יותר למסלול ה-Albsteig המלא – מסלול מעגלי של כ-6 ק"מ שיוצא מ-Görwihl ועובר ישירות דרך מפלי Höllbach הסודיים. המסלול מתאים למשפחות שמעדיפות טיול קצר ומרוכז (כ-2.5–3 שעות) ומניב את עיקר הקסם של האזור – מפלים, נקיקים ויער קסום – בפחות זמן.',
+    note:'~6 ק"מ · ~2.5–3 שעות · יוצא מ-Görwihl · ~20 דק\' מ-Waldshut-Tiengen',
+    url:'https://www.schwarzwald-tourismus.info/en/outdoor/hike', urlLabel:'מסלולי הליכה – Black Forest'
+  },
+  {
+    id:'opt-4', name:'פרייבורג (Freiburg im Breisgau)', type:'city',
+    category:'ערים ותרבות',
+    coords:[47.9990,7.8421],
+    desc:'פרייבורג היא עיר האוניברסיטה של שחורצוואלד – תוססת, ירוקה, עם חיי רחוב מרהיבים. הייחוד שלה: Bächle – תעלות מים קטנות שזורמות לאורך כל הרחובות (מהמאה ה-13!). המינסטר (Münster) הוא קתדרלה גותית עצומה עם מגדל פעמונים ייחודי שאפשר לעלות לו. שוק מחאות יומי ליד הקתדרלה.',
+    note:'~80 ק"מ · ~1:10 שעות מ-Waldshut-Tiengen · כדאי לשלב עם Schauinslandbahn',
+    url:'https://visit.freiburg.de/en', urlLabel:'Visit Freiburg – מדריך'
+  },
+  {
+    id:'opt-5', name:'Schauinslandbahn – רכבל + מכרה', type:'attraction',
+    category:'ערים ותרבות',
+    coords:[47.9404,7.9092],
+    desc:'Schauinslandbahn הוא אחד הרכבלים הארוכים בגרמניה – 3.6 ק"מ מהעמק לפסגה (1,284 מ\'). למעלה: נוף פנורמי עצום על פרייבורג, עמק הריין והאלפים ביום בהיר. ממש ליד תחנת העליון: מכרה כסף עתיק (Silberbergwerk) שפעל כ-800 שנה – סיור מודרך מרתק. כרטיס רכבל: ~17 אירו, מכרה: +8 אירו.',
+    note:'~65 ק"מ מ-Waldshut-Tiengen · מתאים לשילוב עם יום פרייבורג',
+    url:'https://www.schauinslandbahn.de/en/', urlLabel:'Schauinslandbahn – אתר רשמי'
+  },
+  {
+    id:'opt-6', name:'St. Blasien – קתדרלה + כפר הרים', type:'city',
+    category:'ערים ותרבות',
+    coords:[47.7617,8.1311],
+    desc:'St. Blasien הוא כפר הרים אלפיני קסום, מפורסם בזכות הכנסייה הבנדיקטינית (Dom St. Blasien) עם אחת הכיפות הגדולות ביותר באירופה (~36 מ\' קוטר!). הכנסייה נבנתה ב-1781 בהשראת הפנתיאון ברומא. הכניסה חינם. הכפר עצמו יפה ושקט עם אטמוספרה אלפינית ייחודית – מתאים כהפסקת צהריים שקטה בדרך מ-Görwihl חזרה.',
+    note:'כניסה חינם · ~25 דק\' מ-Görwihl · ~35 דק\' מ-Waldshut-Tiengen',
+    url:'https://www.stblasien.de/', urlLabel:'St. Blasien – אתר רשמי'
+  },
+  {
+    id:'opt-7', name:'אגם טיטיזה (Titisee)', type:'lake',
+    category:'אגמים ושחייה',
+    coords:[47.8978,8.1481],
+    desc:'אגם טיטיזה הוא הלב הפועם של דרום שחורצוואלד! אגם גלאציאלי יפהפה בגובה 850 מ\' עם מים צלולים וצינוניים (~20°C בקיץ). מה לעשות: שכרו סירת פדלים עם מגלשה קטנה למים, שוטו בסירת מנוע עצמאית, או פשוט טיילו בטיילת השוקקת המלאה בחנויות ומסעדות. ניתן לשכור גם SUP וקייאק. כניסה לאזור הרחצה בחינם! 🅿️ טיפ חניה: חנו בחניון תחנת הרכבת ותגיעו לטיילת ברגל תוך דקות ספורות ובחינם.',
+    note:'כניסה חינם · סירות עם מגלשה · SUP · חנו בתחנת הרכבת',
+    url:'https://www.hochschwarzwald.de/en/things-to-do/summer-activities/swimming',
+    urlLabel:'שחייה ב-Titisee'
+  },
+
+  // ── קרוב ל-Waldshut-Tiengen ──────────────────────────────────
+  {
+    id:'opt-8', name:'Bad Säckingen – גשר העץ הארוך בעולם', type:'city',
+    category:'ערים ותרבות',
+    coords:[47.5539,7.9446],
+    desc:'Bad Säckingen היא עיירת ריין ציורית הממוקמת ממש ליד Waldshut-Tiengen – רק 15 דקות נסיעה! הכוכב הבולט: Fridolinsbrücke – גשר עץ מקורה מהמאה ה-13 באורך 203 מ\', הארוך מסוגו בכל אירופה! הגשר מחבר בין גרמניה לשוויץ מעל נהר הריין. בנוסף: קתדרלת St. Fridolin (בארוק מפואר, כניסה חינם), מרכז עירוני היסטורי עם בתים צבעוניים, מוזיאון הטרומפטר (על אגדת האהבה המקומית) וטיילת ריין נהדרת. ניתן להגיע ממש לשוויץ ברגל דרך הגשר! עיירה קסומה לחצי יום.',
+    note:'~15 דק\' מ-Waldshut-Tiengen · חינם · גשר עץ מקורה ארוך בעולם',
+    url:'https://www.bad-saeckingen.de/tourismus', urlLabel:'Bad Säckingen – תיירות'
+  },
+  {
+    id:'opt-9', name:'Laufenburg – עיר כפולה על הריין 🇩🇪🇨🇭', type:'city',
+    category:'ערים ותרבות',
+    coords:[47.5648,7.8994],
+    desc:'לאופנבורג היא יצירה נדירה – עיר היסטורית שנחצתה לשניים בין גרמניה לשוויץ בזמן קביעת גבול המאה ה-19. שתי הערים (גרמנית ושוויצרית) חולקות שם, נהר ריין ביניהן, ומחוברות בגשר להולכי רגל. המרכז הישן גרמני מדהים: שוק עתיק, כנסייה מימי הביניים, שרידי חומת עיר, מבצר. הנהר כאן יוצר סחרורים טבעיים עוצרי נשימה – שווה לעצור על הגשר ולהתבונן. ~20 דק\' מ-Waldshut-Tiengen.',
+    note:'~20 דק\' מ-Waldshut-Tiengen · חינם · עיר כפולה גרמניה-שוויץ',
+    url:'https://www.laufenburg.de/tourismus', urlLabel:'Laufenburg – מידע'
+  },
+  {
+    id:'opt-10', name:'Todtmoos – כפר ספא בהרים', type:'nature',
+    category:'טיולי טבע',
+    coords:[47.7408,8.0269],
+    desc:'טודטמוס הוא כפר הרים שקט ומרגיע בדרום שחורצוואלד, בגובה ~850 מ\'. מפורסם בכנסיית העלייה לרגל (Wallfahrtskirche) – כנסייה בארוקית יפהפייה שאליה מגיעים עולי רגל מכל הסביבה. האזור מציע מסלולי הליכה מדהימים בין עמקים וייערות, ואוויר הרים צח ביוני. קרוב ל-Waldshut-Tiengen (~35 דק\') ומהווה נקודת מוצא מצוינת למסלולי טבע שקטים. מתאים לאנשים שמחפשים הפסקה שקטה ונופים ירוקים ללא צפיפות.',
+    note:'~35 דק\' מ-Waldshut-Tiengen · הליכה קלה · כנסיית עלייה לרגל',
+    url:'https://www.todtmoos.de/tourismus', urlLabel:'Todtmoos – תיירות'
+  },
+
+  // ── קרוב למלון Hofgut Sternen ────────────────────────────────
+  {
+    id:'opt-11', name:'Mummelsee + Hornisgrinde – אגם קסום ופסגה', type:'nature',
+    category:'טיולי טבע',
+    coords:[48.5951,8.2090],
+    desc:'מומלזה הוא אגם גלאציאלי קסום בגובה 1,036 מ\' על הכביש הפנורמי של שחורצוואלד (Schwarzwald-Hochstraße). האגם מוקף באגדות ומיתוסים על פיות מים (Nixen), ולאורך שפתו מוצבות פסלים מעוצבים. ניתן להשכיר סירות פדל ולצלוח את האגם. ממש מאחורי האגם מתנשאת Hornisgrinde – הפסגה הגבוהה ביותר בשחורצוואלד הצפוני (1,164 מ\') עם מגדל תצפית ונוף פנורמי עצום. בסוף שבוע ניתן להגיע לפסגה באוטובוס מהאגם. מתאים לחצי יום מהמלון Hofgut Sternen (~50 דק\').',
+    note:'~50 דק\' מהמלון Hofgut Sternen · סירות פדל · פסגה 1164 מ\' · ~~1.5h מ-Waldshut',
+    url:'https://www.schwarzwaldportal.com/en/excursion-destination-mummelsee.html', urlLabel:'Mummelsee – מידע'
+  },
+  {
+    id:'opt-12', name:'Gengenbach – פנינה מימי הביניים', type:'city',
+    category:'ערים ותרבות',
+    coords:[48.4027,8.0144],
+    desc:'גנגנבך נחשבת לאחת מהעיירות ההיסטוריות היפות ביותר בגרמניה – חצי-עץ (Fachwerk) בצבעים עזים, כיכר שוק ציורית, חומת עיר שלמה עם שלושה שערי כניסה. הכוכב של הכרמס הוא בית הועד העירוני הצבוע בפרסקו כחול-זהב ושדרה ראשית רחבה ושלווה. מוזיאון קטן ונחמד על ההיסטוריה, קפה ועוגות שחורצוואלד. העיירה חגה פסטיבל יין קסום בסתיו ואדוות חג מולד מפורסמות. ~35 דק\' מהמלון Hofgut Sternen.',
+    note:'~35 דק\' מהמלון Hofgut Sternen · כניסה חינם · עיר שמורה מהמאה ה-13',
+    url:'https://www.gengenbach.de/tourismus', urlLabel:'Gengenbach – תיירות'
+  },
+  {
+    id:'opt-13', name:'Sankenbachsee – אגם קסום + מפלי Sankenbach', type:'lake',
+    category:'אגמים ושחייה',
+    coords:[48.5264,8.3786],
+    desc:'שנקנבאכזה (Sankenbachsee) הוא אגם גלאציאלי ציורי ליד בַּיירסבְּרוֹן בשחורצוואלד הצפוני. האגם שוחזר ב-1981 לאחר שהתנקז לפני 3,000 שנה, וכיום מוכרז כשמורת טבע. מה שמיוחד בו: השחייה מותרת! מים צלולים ופראיים באווירה ייחודית. מסביב: בֵּי-בֵּי-קיו, מגרש משחקים, מפלי Sankenbach בסמוך (מסלול קל, ~3 ק"מ). שמורת חיות בר קרובה. מתאים ליום שחייה-טבע-יוגה בצפון שחורצוואלד (כ-2 שעות נסיעה מ-Waldshut-Tiengen).',
+    note:'~2h מ-Waldshut-Tiengen · שחייה חינם · מפלים + שמורת חיות',
+    url:'https://www.blackforest-highlights.com/poi/detail/baiersbronn-sankenbachsee-7aa74813b6', urlLabel:'Sankenbachsee – מידע'
+  },
+
+  // ── רחוק יותר – כדאי לתכנן מראש ──────────────────────────────
+  {
+    id:'opt-14', name:'Baumwipfelpfad + WILDLINE (Bad Wildbad)', type:'attraction',
+    category:'מגלשות הרים ואדרנלין',
+    coords:[48.7507,8.5506],
+    desc:'שניים ממוצרי הדגל של שחורצוואלד בנקודה אחת! Baumwipfelpfad הוא שביל גגות-יער (1.2 ק"מ) שעובר גבוה בין כתרי עצי האורן, עם תחנות חינוכיות ומגלשת-מנהרה של 55 מ\' בסופו. ממש מעליו: גשר WILDLINE – 380 מ\' ו-60 מ\' גובה! הגשר בנוי בקשת עולה (ולא שטוחה), מה שהופך אותו לייחודי בכל אירופה – כשהולכים קדימה זה מרגיש שאתה עולה בגשר לאין קץ, ואז פתאום יורד. אדרנלין, רוח ונוף עצום על Bad Wildbad בעמק. מתאים מגיל 6. ~2 שעות נסיעה מ-Waldshut-Tiengen.',
+    note:'~2h מ-Waldshut-Tiengen · מגיל 6 · גשר ייחודי באירופה · כניסה משולמת',
+    url:'https://wildline.de/', urlLabel:'WILDLINE + Baumwipfelpfad'
+  },
+  {
+    id:'opt-15', name:'Caracalla Therme – ספא תרמי (Baden-Baden)', type:'attraction',
+    category:'פארקי מים ואקווה',
+    coords:[48.7635,8.2376],
+    desc:'Caracalla Therme בעיר הספא המפורסמת Baden-Baden – חוויה מרגיעה ואיכותית שאין כמוה! הפארק התרמי מציע בריכות מים מחוממים (34–38°C) ובריכות מים קרים, ג\'טים, זרמי מים, בריכה חיצונית עם נוף לגנים, ומנהרות שחייה. מים מינרלים טבעיים שעולים מהאדמה ב-50–68°C עם מינרלים מרפאים. הכניסה מותרת מגיל 7. מחיר: ~25 אירו ל-2 שעות. Baden-Baden עצמה שווה ביקור: גן עדן קזינו, גנים ויקטוריאניים, אדריכלות בל-אפוק. ~2 שעות מ-Waldshut-Tiengen.',
+    note:'~2h מ-Waldshut-Tiengen · מגיל 7 · ~25 אירו ל-2 שעות',
+    url:'https://www.carasana.de/en/caracalla-therme/', urlLabel:'Caracalla Therme – מידע'
+  },
+  {
+    id:'opt-16', name:'Windgfällweiher – אגם הסוד', type:'lake',
+    category:'אגמים ושחייה',
+    coords:[47.8780,8.1530],
+    desc:'אגם קטן, שקט ולא מתויר שמסתתר בין טיטיזה לשלוכזה – המקום המושלם לפיקניק רומנטי ולתמונות משגעות בלי המוני תיירים ברקע! האגם לא מופיע על מפות התיירות הרגילות ולכן נשאר נקי ושקט. המים שקופים ובטמפרטורה נעימה בקיץ – רחצה חופשית בטבע ללא אזורים מסומנים. אין חנויות ואין קיוסקים, רק יער ושתיקה. נגישות: חניה קטנה בכביש L149 בין Lenzkirch לבין Schluchsee.',
+    note:'~15 דק\' מ-Titisee · כניסה חינם · ללא עומס תיירים · שחייה חופשית',
+    url:'https://www.schwarzwald-tourismus.info/orte/windgfaellweiher', urlLabel:'מידע על האגם'
+  },
+  {
+    id:'opt-17', name:'Kletterwald Feldberg – פארק חבלים', type:'attraction',
+    category:'מגלשות הרים ואדרנלין',
+    coords:[47.8747,8.0044],
+    desc:'פארק חבלים מעולה וחדש על מדרונות הפלדברג – ההר הגבוה בשחורצוואלד! מסלולים מאתגרים בגבהים שונים בין עצי האשוח הענקיים, מתאים לילדים מגובה 110 ס"מ ועד מבוגרים. גשרי חבלים, מסלולי זיפ-ליין, "נדנדת טרזן" ועוד. גובה האתר (~1200מ\') מוסיף לתחושת האדרנלין. אפשר לשלב עם עלייה ב-Feldbergbahn ואחר-כך ירידה ברגל. ⚠️ מומלץ מאוד להזמין מקום מראש עוד מהארץ – האתר מתמלא!',
+    note:'מגובה 110 ס"מ · הזמינו מראש מהארץ! · ~25-35 אירו',
+    url:'https://www.kletterwald-feldberg.de/', urlLabel:'Kletterwald Feldberg'
+  },
+  {
+    id:'opt-18', name:'AquaFun Schluchsee – פארק מים קטן', type:'attraction',
+    category:'פארקי מים ואקווה',
+    coords:[47.8175,8.1789],
+    desc:'פארק מים קטן וחמוד על שפת האגם – מעולה למשפחות עם קטנטנים בימים חמים! מגלשות מים ישירות לתוך האגם, קירות טיפוס צפים, טרמפולינות ומכשולים מתנפחים על המים. כניסה ישירה לאגם לשחייה חופשית. מחיר סביר ואטמוספרה כפרית. חוויה שונה לגמרי מ-Rulantica – שחייה אמיתית באגם פסטורלי עם אטרקציות.',
+    note:'~20 דק\' מ-Titisee · מגיל 3 · ~12-20 אירו · קיץ בלבד · מושלם לקטנים',
+    url:'https://aquafun-schluchsee.de/', urlLabel:'AquaFun Schluchsee'
+  },
+  {
+    id:'opt-19', name:'שביל הגמד – Wichtelpfad Hinterzarten', type:'nature',
+    category:'טיולי טבע',
+    coords:[47.9061,8.1122],
+    desc:'מסלול הליכה מעגלי וקל בלב יער Hinterzarten – שביל הגמד (Wichtelpfad)! לאורך המסלול תחנות הפעלה, משחקים וגני שעשועים, ועשרות פסלוני גמדים מוסתרים בין העצים. יש מסלול נגיש לעגלות של 1.5 ק"מ, ומסלול ארוך יותר של ~3 ק"מ. מתאים לילדים עד גיל ~10, אבל גם הגדולים נהנים מהאווירה. סיום בכפר Hinterzarten המקסים עם בתי קפה ומאפיות. טיול של 2-3 שעות כולל הפסקות.',
+    note:'~10 דק\' מ-Titisee · כניסה חינם · נגיש לעגלות (1.5 ק"מ) · משפחתי',
+    url:'https://www.hochschwarzwald.de/highlights/wichtelpfad-hinterzarten', urlLabel:'שביל הגמד'
+  },
+  {
+    id:'opt-20', name:'מסלול טוני התרנגול – Feldberg', type:'nature',
+    category:'טיולי טבע',
+    coords:[47.8747,8.0044],
+    desc:'שביל הליכה קל ומשעשע ביער על מדרונות הפלדברג עם פסלים ותחנות פעילות לאורכו (~4 ק"מ הלוך ושוב). לאורך המסלול יש עמדות לימוד על בעלי חיים ביער, תצפיות פנורמיות לאגם Titisee ולפסגות הסביבה, ומשחקים בעץ. 💡 טיפ: מומלץ להדפיס מראש את תרגום הסיפור לעברית ולהקריא לילדים בדרך – זה הופך את הטיול לחוויה סיפורית מיוחדת! ניתן לשלב עם תחנת Feldbergbahn ואז לרדת ברגל.',
+    note:'~30 דק\' מ-Titisee · חינם · 4 ק"מ · הדפיסו סיפור בעברית מראש',
+    url:'https://www.feldberg-schwarzwald.de/natur-erleben/naturerlebnispfade', urlLabel:'נתיבי טבע פלדברג'
+  },
+  {
+    id:'opt-21', name:'שביל הפסלים – Grafenhausen', type:'nature',
+    category:'טיולי טבע',
+    coords:[47.8361,8.3328],
+    desc:'שביל מעגלי קצר (1.7 ק"מ) המקיף אגם שקט ומלא בפסלי עץ צבעוניים ומשעשעים! פסלים גדולים של אמנים מהשחורצוואלד, כל אחד ממוקם במקום שבחר האמן עצמו – בשדה, ליד המים, על גבעה. האווירה שקטה ופסטורלית, טיול קל ונעים של כ-45 דקות לכל המשפחה. מתאים גם לעגלות. אפשר להרחיב לשביל ארוך יותר דרך שדות הכפר. קרוב ל-Schluchsee.',
+    note:'~30 דק\' מ-Waldshut · כניסה חינם · 1.7 ק"מ מעגלי · קל לכולם',
+    url:'https://www.grafenhausen.de/tourismus/skulpturenweg', urlLabel:'שביל הפסלים'
+  },
+  {
+    id:'opt-22', name:'VogelPark Steinen – פארק ציפורים', type:'attraction',
+    category:'פארקים ומשפחה',
+    coords:[47.6500,7.7350],
+    desc:'פארק ציפורים מקסים בעיירת Steinen, פחות מ-30 דקות מ-Waldshut-Tiengen. כולל מופע עופות דורסים מרשים (נשרים ובזים בטיסה חופשית!), האכלת ציפורים חווייתית – הילדים מאכילים ציפורים ישירות מהיד, ומתחם קופים חמוד. מאות מינים: תוכים, פינגווינים, טוקנים ועוד. פארק קטן ונעים, מתאים לחצי יום.',
+    note:'~25 דק\' מ-Waldshut · ~15 אירו לאדם · חצי יום',
+    url:'https://www.vogelpark-steinen.de/', urlLabel:'VogelPark Steinen'
+  },
+  {
+    id:'opt-23', name:'Tatzmania – גן חיות + הרפתקאות', type:'attraction',
+    category:'פארקים ומשפחה',
+    coords:[48.2578,7.7856],
+    desc:'Tatzmania בעיירת Löffingen – שילוב ייחודי של גן חיות, פארק שעשועים ופארק חבלים! חיות: זאבים, דובים, פומות, נמרים, נשרים. אזור הרפתקאות: פארק חבלים עם 40+ מסלולים, מגלשות ורוכסן. גן שעשועים לפעוטות. אטרקציה מאוד פופולרית בין משפחות עם ילדים – שווה יום שלם! ~50 דקות נסיעה מ-Breitnau (Hofgut Sternen), ~1:30 שעות מ-Waldshut. כרטיסים אונליין מוזל.',
+    note:'~50 דק\' מ-Breitnau · ~35 אירו מבוגר, 28 ילד · יום שלם · הזמנה מראש',
+    url:'https://tatzmania.de/', urlLabel:'Tatzmania'
+  },
+  {
+    id:'opt-24', name:'קולמר + ריקוויר – אלזס, צרפת', type:'city',
+    category:'ערים ותרבות',
+    coords:[48.0793,7.3585],
+    desc:'קולמר (Colmar) וריקוויר (Riquewihr) באלזס הצרפתי – אולי הכפרים הציוריים ביותר בעולם! קולמר: עיר בורגנית עם בתים צבעוניים מסגנון Fachwerk לאורך תעלות – "ונציה הקטנה" של אלזס. הגרמנית והצרפתית מתמזגות: קרפ, טרט פלמביה ובירה מקומית. ריקוויר: כפר יין מימי הביניים מוקף חומה עתיקה – רחובות אבן, חנויות יין, שוק ורדים. ~1 שעה מ-Breitnau ו-~1:15 שעות מ-Waldshut. יש לקחת אירו צרפתי (לא שקל).',
+    note:'~1 שעה מ-Breitnau · לא נדרש ויזה מיוחד · אירו · גנן יין מומלץ',
+    url:'https://www.tourisme-colmar.com/en/', urlLabel:'קולמר – אתר תיירות'
+  },
+  {
+    id:'opt-25', name:'Lindt Home of Chocolate – ציריך', type:'attraction',
+    category:'ערים ותרבות',
+    coords:[47.3490,8.5140],
+    desc:'מוזיאון השוקולד של Lindt ליד ציריך – חוויה לכל הגילאים וחובה לכל חובב שוקולד! המוזיאון הענק כולל: מגדל הפונטן הגדול בעולם של שוקולד נוזלי (9 מטרים!), תערוכה אינטראקטיבית על 500 שנות היסטוריה של שוקולד, סדנת הכנת שוקולד (booking נפרד), וחנות ענקית של Lindt. מומלץ מאוד לשלב עם ביום ה-11 (יום הטיסה חזרה) – ~30 דקות מנמל התעופה ציריך. כרטיסים אונליין.',
+    note:'~30 דק\' מ-ZRH · ~16 אירו מבוגר, 9 ילד · ~2 שעות · מומלץ ביום הטיסה',
+    url:'https://www.lindt-home-of-chocolate.com/', urlLabel:'Lindt Home of Chocolate'
+  }
+];
+
+// ═══════════════════════════════════════════════════════════════════
 //  DAYS & ACTIVITIES
 // ═══════════════════════════════════════════════════════════════════
 const DAYS = [
@@ -301,8 +639,8 @@ const DAYS = [
       {
         time:'15:30', name:'Ravennaschlucht – קניון רוונה', type:'nature',
         coords:[47.9508,8.0412], duration:'~2 שעות',
-        desc:'קניון מרהיב בלב יער השחורצוואלד, הממוקם ממש מאחורי המלון – אפשר ללכת לשם ברגל מהחדר! המסלול עובר לאורך נחל הרוונה עם מפלים, גשרי עץ, נקיקים ציוריים וצמחיית יער עתיקה. הוויאדוקט המפורסם (גשר הרכבת) נראה לאורך המסלול. מתאים לכל הגילאים, גם לאיתי (11). כ-4 ק"מ, עלייה מתונה. מומלץ: נעלי הליכה.',
-        note:'ישירות מהמלון · 4 ק"מ · עלייה מתונה',
+        desc:'קניון מרהיב בלב יער השחורצוואלד, הממוקם ממש מאחורי המלון – אפשר ללכת לשם ברגל מהחדר! המסלול עובר לאורך נחל הרוונה עם מפלים, גשרי עץ, נקיקים ציוריים וצמחיית יער עתיקה. הוויאדוקט המפורסם (גשר הרכבת) נראה לאורך המסלול. מתאים לכל הגילאים. 💡 מומלץ: עלו עד לבית הקפה הביתי Haus Ketterer לעוגה טובה, ורדו חזרה – זה בדיוק המרחק הנכון לסיום יום ההגעה. ⚠️ לא מתאים לעגלות. נעלי הליכה הכרחיות.',
+        note:'ישירות מהמלון · 4 ק"מ · מומלץ עד Haus Ketterer · ללא עגלות',
         url:'https://www.alltrails.com/trail/germany/baden-wurttemberg/der-ravennaschlucht-weg',
         urlLabel:'מסלול ב-AllTrails'
       }
@@ -311,44 +649,43 @@ const DAYS = [
 
   {
     id:1, date:'16/07', dow:"יום ה'", hotel:0,
-    title:'אגם טיטיזה + הר פלדברג + פארק מים',
-    sub:'אגם · פסגה 1493 מ\' · מגלשות אקסטרים',
+    title:'הר פלדברג + Feldbergbahn + Badeparadies',
+    sub:'פסגה 1493 מ\' · רכבל · פארק מים אקסטרים',
     activities:[
       {
-        time:'09:00', name:'נסיעה לאגם טיטיזה', type:'drive',
-        coords:[47.8978,8.1481], duration:'~10 דק\'',
-        desc:'נסיעה קצרה ממש מהמלון לאגם הציורי ביותר ב-Black Forest.',
-        note:'~10 דקות מהמלון', url:'https://www.hochschwarzwald.de/en/destinations/titisee', urlLabel:'Titisee – מידע'
+        time:'09:00', name:'נסיעה לפלדברג', type:'drive',
+        coords:[47.8747,8.0044], duration:'~20 דק\'',
+        desc:'נסיעה ישירות מהמלון Hofgut Sternen לפלדברג, ההר הגבוה ביותר ב-Black Forest.',
+        note:'~20 דק\' מהמלון', url:'https://www.feldberg-erlebnis.de/en/summer', urlLabel:'אתר פלדברג'
       },
       {
-        time:'10:00', name:'אגם טיטיזה (Titisee)', type:'lake',
-        coords:[47.8978,8.1481], duration:'~3 שעות',
-        desc:'אגם טיטיזה הוא אגם הגלאציאלי (מקרחונים) היפה ביותר ב-Black Forest, בגובה 850 מ\'. המים צלולים וצינוניים (~20°C בקיץ) ומתאימים מאוד לשחייה. כניסה לאזור הרחצה בחינם! ניתן לשכור סירות פדל, SUP וקייאק. הטיילת מסביב לאגם מלאה בחנויות, מסעדות ופינות ישיבה. אחת האטרקציות המשפחתיות הכי פופולריות ב-Black Forest.',
-        note:'כניסה חינם · שחייה · סירות · SUP',
-        url:'https://www.hochschwarzwald.de/en/things-to-do/summer-activities/swimming',
-        urlLabel:'שחייה ב-Titisee'
-      },
-      {
-        time:'13:00', name:'נסיעה לפלדברג', type:'drive',
-        coords:[47.8747,8.0044], duration:'~15 דק\'',
-        desc:'נסיעה קצרה ממש לעבר הפסגה הגבוהה ביותר ב-Black Forest.',
-        note:'~15 דקות מהאגם', url:'https://www.feldberg-erlebnis.de/en/summer', urlLabel:'אתר פלדברג'
-      },
-      {
-        time:'14:00', name:'הר פלדברג + Feldbergbahn', type:'nature',
-        coords:[47.8747,8.0044], duration:'~2.5 שעות',
-        desc:'פלדברג (1,493 מ\') הוא הר הפסגה הגבוה ביותר ב-Black Forest ובכל דרום-מערב גרמניה. רכבל ה-Feldbergbahn נוסע עד לקרבת הפסגה ב-8 מושבים לקרוסלה. בפסגה: מגדל תצפית עם מעלית פנימית ומרפסות תצפית לכל הכיוונים. \'מסלול הגמדים\' (Gnome Trail) הוא מסלול קסום של 1.8–2 ק"מ ביער לילות. בקיץ הגישה לפסגה פתוחה לכולם ויש המון מסלולי הליכה. ממש על הגבול של שמורת הטבע הגדולה ביותר בגרמניה.',
-        note:'רכבל + מגדל תצפית עם מעלית',
+        time:'09:30', name:'הר פלדברג + Feldbergbahn', type:'nature',
+        coords:[47.8747,8.0044], duration:'~3 שעות',
+        desc:'פלדברג (1,493 מ\') הוא ההר הגבוה ביותר ב-Black Forest ובכל דרום-מערב גרמניה! רכבל Feldbergbahn נוסע עד לקרבת הפסגה. בפסגה: מגדל תצפית עם מעלית, מוזיאון טבע אינטראקטיבי, מוזיאון שנאפס מקורי ומסלולי הליכה לכל הכיוונים. ❄️ טיפ חשוב: קר למעלה גם בקיץ – חובה להביא בגדים חמים לכולם! ⏰ האתר נסגר בשעה 17:00, תכננו את הזמן נכון. כרטיסי הרכבל לרוב כלולים בכרטיסי הטבות אזוריים.',
+        note:'חובה בגדים חמים! · נסגר 17:00 · מגדל תצפית + מוזיאונים',
         url:'https://www.feldbergbahn.de/',
         urlLabel:'Feldbergbahn – רכבל'
       },
       {
-        time:'17:00', name:'Badeparadies Schwarzwald', type:'attraction',
-        coords:[47.9064,8.1736], duration:'~3 שעות',
-        desc:'פארק המים הגדול ביותר של שחורצוואלד – חוויה אקסטרימלית! בריכות טרופיות עצומות, אלמנטים ייחודיים: גלים, מגלשות אקסטרים עם עיקולים, בריכת ג\'קוזי, ספא ועוד. מושלם לבני הנוער (עמית, נדב, איתי). מומלץ להגיע מוקדם כי הפארק מתמלא. מחיר כניסה: ~25–35 אירו למבוגר, פחות לילדים.',
+        time:'13:00', name:'נסיעה ל-Badeparadies', type:'drive',
+        coords:[47.9064,8.1736], duration:'~30 דק\'',
+        desc:'נסיעה מפלדברג לכיוון Titisee-Neustadt עד לפארק המים Badeparadies.',
+        note:'~30 דק\' מפלדברג', url:'https://www.badeparadies-schwarzwald.de/en/', urlLabel:'Badeparadies'
+      },
+      {
+        time:'14:00', name:'Badeparadies Schwarzwald', type:'attraction',
+        coords:[47.9064,8.1736], duration:'~3.5 שעות',
+        desc:'פארק המים הגדול ביותר של שחורצוואלד – שתי דקות מ-Titisee! שלושה מתחמים: 🌴 הפארק הטרופי המפנק עם בר משקאות בתוך המים החמים, 🎢 פארק מגלשות מטורף לילדים עם עיקולים ואינסוף שחרורי אדרנלין, ו-🧖 מתחם סאונות שקט למבוגרים (כניסה בעירום/מגבת מגיל 16). מחיר כניסה: ~25–35 אירו. ⚠️ טיפ חשוב: שמרו היטב על הצמידים האלקטרוניים של הילדים – אובדן שלהם גורר קנס כבד!',
         note:'פארק מים – הגדול ב-Black Forest',
         url:'https://www.badeparadies-schwarzwald.de/en/',
         urlLabel:'Badeparadies – אתר רשמי'
+      },
+      {
+        time:'17:30', name:'חזרה למלון Hofgut Sternen', type:'drive',
+        coords:[47.9528,8.0350], duration:'~20 דק\'',
+        desc:'נסיעה קצרה מ-Badeparadies חזרה למלון Hofgut Sternen בברייטנאו.',
+        note:'~17 ק"מ · ~20 דק\'',
+        url:'https://www.hofgut-sternen.de/en/', urlLabel:'Hofgut Sternen'
       }
     ]
   },
@@ -398,7 +735,7 @@ const DAYS = [
       {
         time:'10:00', name:'מפלי טודנאו (Todtnauer Wasserfall)', type:'nature',
         coords:[47.8322,7.9411], duration:'~1.5 שעות',
-        desc:'מפלי טודנאו הם אחד מהמפלים הגדולים ב-Black Forest – מים זורמים מרום 97 מ\' לגובה המדהים. המסלול ליד המפלים הוא קל ונוח ומתאים לכל המשפחה. היער סביב יפהפה וצנן. מכאן נלך ל-Hasenhorn Rodelbahn הממוקם ממש ליד.',
+        desc:'מסלול הליכה קצר ונוח המוביל לאחד המפלים המרשימים ביותר ב-Black Forest – מים זורמים מרום 97 מ\'! היער סביב יפהפה וצנן. 💡 בתחתית המפל יש מיטות עץ מפנקות – עצרו לנשום, הניחו לרעש המים לעטוף אתכם ונוחו לפני שממשיכים ל-Hasenhorn. חוויה שקטה ומרגיעה לפני האדרנלין של המגלשות. מכאן ל-Hasenhorn: ~5 דקות.',
         note:'~1.5 שעות · מתאים לכל הגילאים',
         url:'https://www.todtnau.de/freizeit-tourismus/sehenswuerdigkeiten/wasserfall',
         urlLabel:'מפלי טודנאו – מידע רשמי'
@@ -418,6 +755,13 @@ const DAYS = [
         note:'אדרנלין! גובה עשרות מטרים',
         url:'https://www.blackforestline.de/',
         urlLabel:'Blackforestline – אתר רשמי'
+      },
+      {
+        time:'16:30', name:'חזרה למלון Hofgut Sternen', type:'drive',
+        coords:[47.9528,8.0350], duration:'~25 דק\'',
+        desc:'נסיעה מ-Hasenhorn / Blackforestline בטודנאו חזרה צפונה למלון Hofgut Sternen.',
+        note:'~22 ק"מ · ~25 דק\'',
+        url:'https://www.hofgut-sternen.de/en/', urlLabel:'Hofgut Sternen'
       }
     ]
   },
@@ -436,7 +780,7 @@ const DAYS = [
       {
         time:'10:00', name:'אגם שלוכזי (Schluchsee)', type:'lake',
         coords:[47.8175,8.1789], duration:'~3 שעות',
-        desc:'שלוכזי הוא האגם הגדול ביותר ב-Black Forest (כ-5.5 ק"מ) ואחד היפים. האגם מוקף יער אורנים ומציע שחייה נהדרת, השכרת SUP (Stand-Up Paddle), קייאקים וסירות. המים צינוניים ורעננים – מושלם ליום קיץ חם. יש טיילת לאורך שפת האגם עם מסעדות ומרפסות. כניסה לחוף הרחצה: ~5 אירו.',
+        desc:'שלוכזי הוא אגם מלאכותי ענק ופסטורלי – האגם הגדול ביותר ב-Black Forest (כ-5.5 ק"מ). 🚲 הדרך הכי יפה לחוות אותו: שכרו אופניים ויצאו לרכיבה קלה סביבו – הנוף מדהים! גם שחייה נהדרת, השכרת SUP וקייאקים. המים צינוניים ורעננים – מושלם ליום קיץ חם. יש טיילת לאורך שפת האגם עם מסעדות ומרפסות. כניסה לחוף הרחצה: ~5 אירו.',
         note:'האגם הגדול ב-Black Forest · SUP/קייאק להשכרה',
         url:'https://www.schluchsee.de/en/',
         urlLabel:'Schluchsee – אתר רשמי'
@@ -450,10 +794,17 @@ const DAYS = [
       {
         time:'14:00', name:'Action Forest – פארק חבלים אקסטרים', type:'attraction',
         coords:[47.9024,8.1528], duration:'~3 שעות',
-        desc:'Action Forest הוא פארק חבלים בין העצים (Kletterwald) עם 6 מסלולי קושי שונים ו-2 זיפ-ליין מרגשות! הגובה מגיע ל-21 מ\' בין כתרי עצי הכנפון. כל אחד עם רתמה ועם קצת אומץ – ו-adventure בטוח ומלהיב. מסלולים לכל הגילאים (גם לאיתי 11). מומלץ להזמין מראש באתר. לבוש: נעלי ספורט סגורות.',
+        desc:'Action Forest הוא פארק חבלים בין העצים (Kletterwald) הממוקם ממש ליד אגם Titisee! 5 מסלולי טיפוס מאתגרים בגבהים שונים בין צמרות העצים, כולם בבטיחות מלאה עם רתמות. הגובה מגיע ל-21 מ\' בין כתרי הכנפונים. זיפ-ליין מרגשות! מסלולים לכל הגילאים (גם לאיתי 11). מומלץ להזמין מראש באתר. לבוש: נעלי ספורט סגורות.',
         note:'6 מסלולים + זיפ-ליין · מגיל 6',
         url:'https://www.kletterwald-actionforest.de/',
         urlLabel:'Action Forest – הזמן מקום'
+      },
+      {
+        time:'17:00', name:'חזרה למלון Hofgut Sternen', type:'drive',
+        coords:[47.9528,8.0350], duration:'~20 דק\'',
+        desc:'נסיעה מ-Action Forest ליד טיטיזה-נוישטאט חזרה למלון Hofgut Sternen.',
+        note:'~18 ק"מ · ~20 דק\'',
+        url:'https://www.hofgut-sternen.de/en/', urlLabel:'Hofgut Sternen'
       }
     ]
   },
@@ -490,6 +841,13 @@ const DAYS = [
         note:'מוזיאון פתוח + מגלשות הרים Sommerrodelbahn',
         url:'https://www.vogtsbauernhof.de/en/',
         urlLabel:'Vogtsbauernhof – אתר רשמי'
+      },
+      {
+        time:'17:00', name:'חזרה למלון Hofgut Sternen', type:'drive',
+        coords:[47.9528,8.0350], duration:'~45 דק\'',
+        desc:'נסיעה מגוטאך דרומה בחזרה למלון Hofgut Sternen בברייטנאו.',
+        note:'~38 ק"מ · ~45 דק\'',
+        url:'https://www.hofgut-sternen.de/en/', urlLabel:'Hofgut Sternen'
       }
     ]
   },
@@ -509,7 +867,7 @@ const DAYS = [
       {
         time:'10:00', name:'Wutachschlucht – קניון ווטאך', type:'nature',
         coords:[47.8167,8.3250], duration:'~3.5 שעות',
-        desc:'Wutachschlucht הוא ה"גרנד קניון" של שחורצוואלד! קניון עמוק של 60–170 מ\' שנחצב על ידי נהר הוואטאך לאורך 34 ק"מ – הגדול מסוגו בגרמניה. הנחל זורם בין סלעים גרוטסקיים, מפלים ווגטציה ירוקה עשירה. אנו הולכים בקטע הקלאסי שמתחיל ב-Schattenmühle ומסתיים ב-Wutachmühle (~6–8 ק"מ, ~3–4 שעות). אוטובוס לטיילים חוזר לנקודת ההתחלה – בדקו לוח זמנים מראש. מסלול מאתגר מעט אך מתאים לכל המשפחה. מומלץ: נעלי הליכה + מים.',
+        desc:'Wutachschlucht – ה"גרנד קניון של יער השחור"! קניון פראי, עמוק ופחות מתויר שנחצב על ידי נהר הוואטאך לאורך 34 ק"מ – הגדול מסוגו בגרמניה. הנחל זורם בין סלעים גרוטסקיים, מפלים וצמחיה ירוקה עשירה. הקטע הקלאסי: Schattenmühle עד Wutachmühle (~6–8 ק"מ, ~3–4 שעות). אוטובוס לטיילים חוזר לנקודת ההתחלה. ⚠️ שימו לב: ההליכה עלולה להיות חלקה וקשה אחרי גשם – מומלץ להגיע בימים יבשים ולהצטייד בנעלי הליכה מעולות!',
         note:'6–8 ק"מ · ~3.5 שעות · אוטובוס לטיילים חזרה',
         url:'https://www.schwarzwaldportal.com/en/excursion-destination-the-wutach-gorge-in-the-high-black-forest.html',
         urlLabel:'קניון ווטאך – מדריך'
@@ -565,14 +923,21 @@ const DAYS = [
         note:'ציורי קיר ייחודיים · 2–3 שעות · כיכר שוק מרהיבה',
         url:'https://www.steinamrhein.ch/',
         urlLabel:'Stein am Rhein – אתר רשמי'
+      },
+      {
+        time:'16:30', name:'חזרה למלון Waldshut-Tiengen', type:'drive',
+        coords:[47.6219,8.2145], duration:'~50 דק\'',
+        desc:'נסיעה ממערב שוויץ חזרה לוולדסהוט-טיינגן לאורך נהר הריין.',
+        note:'~52 ק"מ · ~50 דק\'',
+        url:'https://www.waldshut-tiengen.de/', urlLabel:'Waldshut-Tiengen'
       }
     ]
   },
 
   {
     id:8, date:'23/07', dow:"יום ה'", hotel:1,
-    title:'Albsteig + מפלי הולבך + St. Blasien',
-    sub:'מסלול מעגלי פראי + קתדרלה בארוקית עצומה',
+    title:'Albsteig + מפלי Höllbach',
+    sub:'מסלול מעגלי פראי בלב הטבע · כמעט ריק מתיירים',
     activities:[
       {
         time:'09:00', name:'נסיעה ל-Görwihl', type:'drive',
@@ -589,54 +954,26 @@ const DAYS = [
         urlLabel:'מסלולי הליכה – Black Forest'
       },
       {
-        time:'14:00', name:'נסיעה ל-St. Blasien', type:'drive',
-        coords:[47.7617,8.1311], duration:'~25 דק\'',
-        desc:'נסיעה קצרה לכפר ההרים St. Blasien.',
-        note:'~25 דק\'', url:'https://www.stblasien.de/', urlLabel:'St. Blasien'
-      },
-      {
-        time:'15:00', name:"St. Blasien – קתדרלה + כפר הרים", type:'city',
-        coords:[47.7617,8.1311], duration:'~2 שעות',
-        desc:'St. Blasien הוא כפר הרים אלפיני קסום, מפורסם בעיקר בזכות הכנסייה הבנדיקטינית (Dom St. Blasien) עם אחת הכיפות הגדולות ביותר באירופה (~36 מ\' קוטר הכיפה!). הכנסייה נבנתה ב-1781 ובהשפעה של פנתיאון רומי. הכניסה חינם. הכפר עצמו יפה ושקט עם אטמוספרה אלפינית ייחודית.',
-        note:'כיפה גדולה מהפנתיאון ברומא · כניסה חינם',
-        url:'https://www.stblasien.de/',
-        urlLabel:'St. Blasien – אתר רשמי'
+        time:'14:30', name:'חזרה למלון Waldshut-Tiengen', type:'drive',
+        coords:[47.6219,8.2145], duration:'~25 דק\'',
+        desc:'נסיעה מ-Görwihl חזרה מזרחה לוולדסהוט-טיינגן.',
+        note:'~22 ק"מ · ~25 דק\'',
+        url:'https://www.waldshut-tiengen.de/', urlLabel:'Waldshut-Tiengen'
       }
     ]
   },
 
   {
     id:9, date:'24/07', dow:"יום ו'", hotel:1,
-    title:'פרייבורג + Schauinslandbahn',
-    sub:'עיר עתיקה עם תעלות מים + רכבל פנורמי',
+    title:'יום פנוי – לקבוע',
+    sub:'יום פנוי ממלון Waldshut-Tiengen',
     activities:[
       {
-        time:'09:00', name:'נסיעה לפרייבורג', type:'drive',
-        coords:[47.9990,7.8421], duration:'~1:15 שעות',
-        desc:'נסיעה צפונה-מערבה לפרייבורג, עיר אוניברסיטאית תוססת וציורית.',
-        note:'~1:15 שעות', url:'https://visit.freiburg.de/en', urlLabel:'Visit Freiburg'
-      },
-      {
-        time:'10:00', name:'פרייבורג (Freiburg im Breisgau)', type:'city',
-        coords:[47.9990,7.8421], duration:'~3.5 שעות',
-        desc:'פרייבורג היא עיר האוניברסיטה של שחורצוואלד – תוססת, ירוקה, עם חיי רחוב מרהיבים. הייחוד שלה: Bächle – תעלות מים קטנות שזורמות לאורך כל הרחובות (מהמאה ה-13!) ומרגיעות בחום. המינסטר (Münster) הוא קתדרלה גותית עצומה עם מגדל פעמונים ייחודי שאפשר לעלות לו. שוק מחאות יומי ליד הקתדרלה. מרכז עירוני רחב שנחרב במלה"ע ב-2 ונבנה מחדש. אטמוספרה מצוינת לארוחת צהריים.',
-        note:'Bächle · מינסטר · שוק יומי · עיר אקדמית תוססת',
-        url:'https://visit.freiburg.de/en',
-        urlLabel:'Visit Freiburg – מדריך'
-      },
-      {
-        time:'14:00', name:'נסיעה לשקאונסלנד', type:'drive',
-        coords:[47.9404,7.9092], duration:'~20 דק\'',
-        desc:'נסיעה דרומה מפרייבורג לתחנת הרכבל של שקאונסלנד.',
-        note:'~20 דק\'', url:'https://www.schauinslandbahn.de/en/', urlLabel:'Schauinslandbahn'
-      },
-      {
-        time:'15:00', name:'Schauinslandbahn – רכבל + מכרה', type:'attraction',
-        coords:[47.9404,7.9092], duration:'~2.5 שעות',
-        desc:'Schauinslandbahn הוא אחד הרכבלים הארוכים בגרמניה – 3.6 ק"מ! מהעמק (620 מ\') לפסגת שקאונסלנד (1,284 מ\'). למעלה: נוף פנורמי עצום על פרייבורג, Rhine Valley, האלפים השוויצריים ביום בהיר, ומסלולי הליכה. ממש ליד תחנת העליון יש מכרה כסף עתיק (Silberbergwerk) שפעל כ-800 שנה! סיור מודרך במכרה מרתק ומומלץ. כרטיס רכבל: ~17 אירו, מכרה: ~8 אירו נוספים.',
-        note:'3.6 ק"מ · פסגה 1284 מ\' + מכרה עתיק',
-        url:'https://www.schauinslandbahn.de/en/',
-        urlLabel:'Schauinslandbahn – אתר רשמי'
+        time:'09:00', name:'יום פנוי – לקבוע', type:'city',
+        coords:[47.6219,8.2145], duration:'—',
+        desc:'יום זה פנוי ומחכה לתוכן. ממוקמים במלון Waldshut-Tiengen – מומלץ לבחור אטרקציה מרשימת האופציונאלי שקרובה לאזור.',
+        note:'בחרו אטרקציה מ-✨ אופציונאלי',
+        url:'https://www.waldshut-tiengen.de/', urlLabel:'Waldshut-Tiengen'
       }
     ]
   },
@@ -729,8 +1066,8 @@ function buildPop(act, dayInfo) {
 // ── State ──
 let allMks=[], routeLayers=[], activeDay='all';
 
-// ── Hotel markers (always visible) ──
-HOTELS.forEach(h=>{
+// ── Hotel markers ──
+HOTELS.forEach((h,hi)=>{
   const cfg=T.hotel;
   const pop=`
   <div class="pop">
@@ -746,7 +1083,7 @@ HOTELS.forEach(h=>{
     </div>
   </div>`;
   const m=L.marker(h.coords,{icon:mkIcon('hotel',38),zIndexOffset:500}).bindPopup(pop,{maxWidth:300}).addTo(map);
-  allMks.push({m, dayIds:'hotel', type:'hotel'});
+  allMks.push({m, dayIds:'hotel', type:'hotel', hotelIdx:hi});
 });
 
 // ── Activity markers ──
@@ -760,11 +1097,34 @@ DAYS.forEach(day=>{
   });
 });
 
-// ── Route lines ──
+// ── Optional attraction markers (hidden by default) ──
+OPTIONAL.forEach(o=>{
+  const cfg=T[o.type]||T.nature;
+  const pop=`
+  <div class="pop">
+    <div class="pop-head" style="background:${cfg.color}">
+      <div class="pop-type">${cfg.icon} ${cfg.label} · אופציונלי</div>
+      <div class="pop-name">${o.name}</div>
+    </div>
+    <div class="pop-body">
+      <div class="pop-meta"><span>📂 ${o.category}</span></div>
+      <div class="pop-desc">${o.desc}</div>
+      <a class="pop-link" style="background:${cfg.color}" href="${o.url}" target="_blank"
+         onclick="event.stopPropagation()">🌐 ${o.urlLabel}</a>
+    </div>
+  </div>`;
+  const m=L.marker(o.coords,{icon:mkIcon(o.type,32),zIndexOffset:50,opacity:0.12})
+    .bindPopup(pop,{maxWidth:300}).addTo(map);
+  if(m._icon) m._icon.style.pointerEvents='none';
+  allMks.push({m, dayIds:'optional', type:'optional', optId:o.id});
+});
+
+// ── Route lines (starts from hotel) ──
 function drawRoute(dayId){
   clearRoutes();
   const day=DAYS[dayId];
-  const pts=day.activities.map(a=>a.coords);
+  const hotelCoords=HOTELS[day.hotel].coords;
+  const pts=[hotelCoords, ...day.activities.map(a=>a.coords)];
   if(pts.length>1){
     const ln=L.polyline(pts,{color:'#2d6a2d',weight:2.5,opacity:.55,dashArray:'8,6'}).addTo(map);
     routeLayers.push(ln);
@@ -774,8 +1134,17 @@ function clearRoutes(){routeLayers.forEach(l=>map.removeLayer(l));routeLayers=[]
 
 // ── Marker filter ──
 function filterMks(dayId){
-  allMks.forEach(({m,dayIds,type})=>{
-    const show=dayId==='all'||type==='hotel'||(Array.isArray(dayIds)&&dayIds.includes(dayId));
+  allMks.forEach(({m,dayIds,type,hotelIdx})=>{
+    let show;
+    if(dayId==='all'){
+      show = type!=='optional';
+    } else if(dayId==='opt'){
+      show = type==='hotel' || type==='optional';
+    } else {
+      if(type==='hotel')     show = (hotelIdx === DAYS[dayId].hotel);
+      else if(type==='optional') show = false;
+      else show = Array.isArray(dayIds) && dayIds.includes(dayId);
+    }
     m.setOpacity(show?1:0.12);
     if(m._icon) m._icon.style.pointerEvents=show?'auto':'none';
   });
@@ -849,6 +1218,15 @@ DAYS.forEach(d=>{
   t.onclick=()=>selDay(d.id);
   tabsWrap.appendChild(t);
 });
+// Optional attractions tab
+{
+  const t=document.createElement('div');
+  t.className='tab opt-tab';
+  t.textContent='✨ אופציונאלי';
+  t.title='אטרקציות אופציונליות';
+  t.onclick=()=>selDay('opt');
+  tabsWrap.appendChild(t);
+}
 
 // ── Select day ──
 function selDay(dayId){
@@ -859,12 +1237,50 @@ function selDay(dayId){
     clearRoutes(); filterMks('all');
     map.flyTo([47.92,8.25],9,{duration:1});
     renderSummary();
+  } else if(dayId==='opt'){
+    document.querySelector('.opt-tab')?.classList.add('on');
+    clearRoutes(); filterMks('opt');
+    map.flyTo([47.92,8.25],9,{duration:1});
+    renderOptional();
   } else {
-    const tabs=[...document.querySelectorAll('.tab:not(.all-tab)')];
+    const tabs=[...document.querySelectorAll('.tab:not(.all-tab):not(.opt-tab)')];
     if(tabs[dayId]) tabs[dayId].classList.add('on');
     drawRoute(dayId); filterMks(dayId); fitDay(dayId);
     renderDay(dayId);
   }
+}
+
+// ── Render optional attractions sidebar ──
+function renderOptional(){
+  const byCat={};
+  OPTIONAL.forEach(o=>{ (byCat[o.category]=byCat[o.category]||[]).push(o); });
+  document.getElementById('panel').innerHTML=`
+    <div class="day-hdr">
+      <div class="dh-date">✨ אטרקציות אופציונליות</div>
+      <div class="dh-title">מה עוד אפשר לעשות?</div>
+      <span class="dh-hotel">לחץ על אטרקציה לפרטים במפה</span>
+    </div>
+    ${Object.entries(byCat).map(([cat,items])=>`
+      <div style="font-size:10px;font-weight:700;color:var(--forest);
+                  padding:8px 6px 4px;letter-spacing:.4px;text-transform:uppercase">${cat}</div>
+      ${items.map(o=>{
+        const cfg=T[o.type]||T.nature;
+        return `<div class="act ${o.type}" onclick="focusOptional('${o.id}')">
+          <div class="act-ico">${cfg.icon}</div>
+          <div style="flex:1">
+            <div class="act-name">${o.name}</div>
+            <div class="act-note">${o.note||''}</div>
+          </div>
+        </div>`;
+      }).join('')}`).join('')}`;
+}
+
+// ── Focus optional marker on map ──
+function focusOptional(optId){
+  const o=OPTIONAL.find(x=>x.id===optId);
+  if(!o) return;
+  map.setView(o.coords,13,{animate:true});
+  allMks.forEach(({m,optId:mid})=>{ if(mid===optId) m.openPopup(); });
 }
 
 // ── Init ──
@@ -878,8 +1294,8 @@ selDay('all');
 (function(){
   const KM={
     'נסיעה למלון Hofgut Sternen':     '~120 ק"מ',
-    'נסיעה לאגם טיטיזה':              '~7 ק"מ',
-    'נסיעה לפלדברג':                  '~13 ק"מ',
+    'נסיעה לפלדברג':                  '~18 ק"מ',
+    'נסיעה ל-Badeparadies':           '~32 ק"מ',
     'נסיעה לפארק אירופה':             '~75 ק"מ',
     'נסיעה חזרה למלון':               '~75 ק"מ',
     'נסיעה לטודנאו':                  '~20 ק"מ',
@@ -923,8 +1339,13 @@ const WMO={
 function getWMO(code){return WMO[code]||['🌡','?'];}
 
 // Format temp: single value or range when two models differ >1°
+// Treat 0 as no-data (July Black Forest temps are never 0°C)
 function fmtTemp(a,b){
+  if(a===0) a=null;
+  if(b===0) b=null;
+  if(a==null && b==null) return '—';
   if(b==null) return `${a}°`;
+  if(a==null) return `${b}°`;
   const d=Math.abs(a-b);
   if(d<=1) return `${Math.round((a+b)/2)}°`;
   return `${Math.min(a,b)}°–${Math.max(a,b)}°`;
@@ -1125,6 +1546,105 @@ function renderDay(dayId){
     }).join('')}
     <div style="text-align:center;font-size:10px;color:#aaa;margin-top:8px;padding:6px">לחץ על פעילות למיקום במפה</div>`;
   if(onlineMode) updateDayBadges(dayId);
+}
+
+// ════════════════════════════════════════════════════════════════
+//  VIEW SWITCHING
+// ════════════════════════════════════════════════════════════════
+let currentView = 'map';
+
+function switchView(v) {
+  currentView = v;
+  document.getElementById('content').style.display = v==='map' ? 'flex' : 'none';
+  const calEl = document.getElementById('cal-view');
+  calEl.style.display = v==='cal' ? 'flex' : 'none';
+  const tbMap = document.getElementById('tbtn-map');
+  const tbCal = document.getElementById('tbtn-cal');
+  const dtBtn = document.getElementById('btn-cal-desktop');
+  if(tbMap) tbMap.classList.toggle('on', v==='map');
+  if(tbCal) tbCal.classList.toggle('on', v==='cal');
+  if(dtBtn) dtBtn.classList.toggle('on', v==='cal');
+  if(v==='cal') renderCalendar();
+  if(v==='map') setTimeout(()=>map.invalidateSize(), 50);
+}
+
+// ════════════════════════════════════════════════════════════════
+//  CALENDAR RENDER
+// ════════════════════════════════════════════════════════════════
+function renderCalendar() {
+  const grid = document.getElementById('cal-grid');
+  if(!grid) return;
+  grid.innerHTML = DAYS.map(day => {
+    const hotel = HOTELS[day.hotel];
+    const hotelShort = hotel.name.length>20 ? hotel.name.slice(0,20)+'…' : hotel.name;
+    const titleShort = day.title.length>26 ? day.title.slice(0,26)+'…' : day.title;
+    const acts = day.activities.map((a,i) => {
+      const cfg = T[a.type]||T.nature;
+      const short = a.name.length>22 ? a.name.slice(0,22)+'…' : a.name;
+      return `<div class="cal-act ${a.type}" onclick="showCalDetail(${day.id},${i})" title="${a.name}">
+        ${cfg.icon} <span style="opacity:.7;font-size:9px">${a.time}</span><br>${short}
+      </div>`;
+    }).join('');
+    return `<div class="cal-col">
+      <div class="cal-head" onclick="showCalDetail(${day.id},-1)">
+        יום ${day.id+1} · ${day.date}<br>
+        <span style="font-size:9px;font-weight:400;opacity:.85">${titleShort}</span>
+      </div>
+      <div class="cal-hotel" onclick="showCalDetail(${day.id},-1)" title="${hotel.name}">
+        🏨 ${hotelShort}
+      </div>
+      ${acts}
+    </div>`;
+  }).join('');
+}
+
+// ════════════════════════════════════════════════════════════════
+//  DETAIL SHEET
+// ════════════════════════════════════════════════════════════════
+function showCalDetail(dayId, actIdx) {
+  const day = DAYS[dayId];
+  const sheet = document.getElementById('detail-sheet');
+  const cont = document.getElementById('detail-content');
+  if(actIdx === -1) {
+    const hotel = HOTELS[day.hotel];
+    cont.innerHTML = `
+      <div class="detail-title">יום ${day.id+1} · ${day.date} · ${day.dow}</div>
+      <div class="detail-meta">${day.title}</div>
+      <div class="detail-note">🏨 ${hotel.name} · ${hotel.dates}</div>
+      <div class="detail-desc">${day.sub}</div>`;
+  } else {
+    const a = day.activities[actIdx];
+    const cfg = T[a.type]||T.nature;
+    const wbId = `wbdtl-${dayId}-${actIdx}`;
+    cont.innerHTML = `
+      <div style="color:${cfg.color};font-size:11px;font-weight:700;margin-bottom:4px">${cfg.icon} ${cfg.label}</div>
+      <div class="detail-title">${a.name}</div>
+      <div class="detail-meta">⏰ ${a.time}${a.duration?' · ⏱ '+a.duration:''} <span id="${wbId}"></span></div>
+      ${a.note ? `<div class="detail-note">📌 ${a.note}</div>` : ''}
+      <div class="detail-desc">${a.desc}</div>
+      ${a.url ? `<a class="detail-link" style="background:${cfg.color}" href="${a.url}" target="_blank">🌐 ${a.urlLabel}</a>` : ''}`;
+    if(onlineMode) {
+      fetchWeather(a.coords[0],a.coords[1]).then(({d1,d2,elev})=>{
+        const iso=TRIP_ISO[dayId];
+        const si1=d1?d1.time.indexOf(iso):-1;
+        const si2=d2?d2.time.indexOf(iso):-1;
+        if(si1<0&&si2<0) return;
+        const wmo=si1>=0?d1.weathercode[si1]:d2.weathercode[si2];
+        const [ico]=getWMO(wmo);
+        const max1=si1>=0?Math.round(d1.temperature_2m_max[si1]):null;
+        const max2=si2>=0?Math.round(d2.temperature_2m_max[si2]):null;
+        const cls=wmo<=1?'sun':wmo<=3?'cloud':'rain';
+        const elevNote=elev?` ⛰${elev}מ'`:'';
+        const el=document.getElementById(wbId);
+        if(el) el.innerHTML=`<span class="w-badge ${cls}">${ico} ${fmtTemp(max1,max2)}${elevNote}</span>`;
+      }).catch(()=>{});
+    }
+  }
+  sheet.classList.add('open');
+}
+
+function closeDetail() {
+  document.getElementById('detail-sheet').classList.remove('open');
 }
 </script>
 </body>
