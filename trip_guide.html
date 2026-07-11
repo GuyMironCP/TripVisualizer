@@ -87,7 +87,8 @@ html, body { height:100%; font-family:'Segoe UI', system-ui, sans-serif; overflo
 .act.drive     { background:#eceff1; color:var(--c-drive); }
 .act.flight    { background:#f3e5f5; color:var(--c-flight); }
 .act.hotel     { background:#e3f2fd; color:var(--c-hotel); }
-.act.city      { background:#ede7f6; color:var(--c-city); }
+.act.city       { background:#ede7f6; color:var(--c-city); }
+.act.restaurant { background:#fce4ec; color:#d84315; }
 .act-ico  { font-size:19px; width:28px; text-align:center; flex-shrink:0; padding-top:2px; }
 .act-time { font-size:9px; font-weight:700; opacity:.75; margin-bottom:1px; }
 .act-name { font-size:12px; font-weight:700; color:#1a1a1a; line-height:1.3; }
@@ -356,6 +357,7 @@ const T = {
   flight:     { color:'#6a1b9a', light:'#f3e5f5', icon:'✈',  label:'טיסה' },
   hotel:      { color:'#1565c0', light:'#e3f2fd', icon:'🏨', label:'מלון' },
   city:       { color:'#4527a0', light:'#ede7f6', icon:'🏛',  label:'עיר / תרבות' },
+  restaurant: { color:'#d84315', light:'#fce4ec', icon:'🍽',  label:'מסעדה' },
 };
 
 // ═══════════════════════════════════════════════════════════════════
@@ -600,6 +602,87 @@ const OPTIONAL = [
     desc:'מוזיאון השוקולד של Lindt ליד ציריך – חוויה לכל הגילאים וחובה לכל חובב שוקולד! המוזיאון הענק כולל: מגדל הפונטן הגדול בעולם של שוקולד נוזלי (9 מטרים!), תערוכה אינטראקטיבית על 500 שנות היסטוריה של שוקולד, סדנת הכנת שוקולד (booking נפרד), וחנות ענקית של Lindt. מומלץ מאוד לשלב עם ביום ה-11 (יום הטיסה חזרה) – ~30 דקות מנמל התעופה ציריך. כרטיסים אונליין.',
     note:'~30 דק\' מ-ZRH · ~16 אירו מבוגר, 9 ילד · ~2 שעות · מומלץ ביום הטיסה',
     url:'https://www.lindt-home-of-chocolate.com/', urlLabel:'Lindt Home of Chocolate'
+  }
+];
+
+// ═══════════════════════════════════════════════════════════════════
+//  RESTAURANTS
+// ═══════════════════════════════════════════════════════════════════
+const RESTAURANTS = [
+  // ── ליד Hofgut Sternen / Breitnau ────────────────────────────
+  {
+    id:'r-0', name:'Restaurant Hofgut Sternen', area:'ליד Hofgut Sternen',
+    coords:[47.9528,8.0350], cuisine:'גרמני / בדני קלאסי', price:'€€',
+    desc:'המסעדה של המלון עצמו – ארוחות בוקר מפנקות ועוגות תוצרת בית, ובערב תפריט גרמני-בדני קלאסי עם מוצרים מקומיים. האידיאל לערב ההגעה הראשון כשלא רוצים לנהוג. בדקו שעות פתיחה מראש.',
+    note:'בתוך המלון · ארוחות ערב גרמניות קלאסיות · ללא נסיעה',
+    url:'https://www.hofgut-sternen.de/', urlLabel:'Hofgut Sternen'
+  },
+  {
+    id:'r-1', name:'Haus Ketterer – קפה ביער הרוונה', area:'ליד Hofgut Sternen',
+    coords:[47.9500,8.0395], cuisine:'בית קפה / עוגות בית', price:'€',
+    desc:'בית קפה ביתי וחמים בתוך קניון רוונה – נקודת הסיום הטבעית של הטיול בקניון! ידועים בעוגות שחורצוואלד (Schwarzwälder Kirschtorte) תוצרת בית ושתייה חמה. מושלם להפסקה מרגיעה בדרך חזרה. אווירה כפרית ושקטה.',
+    note:'בתוך Ravennaschlucht · עוגת שחורצוואלד תוצרת בית · חינמי להגיע',
+    url:'https://www.ravennaschlucht.de/', urlLabel:'Ravennaschlucht'
+  },
+  {
+    id:'r-2', name:'Landgasthof Jostalstüble', area:'ליד Hofgut Sternen',
+    coords:[47.9190,8.0700], cuisine:'גרמני מסורתי / בדני', price:'€€',
+    desc:'לנדגסטהוף (אכסניית כפר) מסורתי ואותנטי בין Breitnau ל-Titisee – בלי תיירים, רק מקומיים! מנות גרמניות גדולות ומשביעות: בשר, פטריות, דגים מקומיים, ~15-30€ לאדם. ידידותי מאוד לילדים: חדר משחקים, תפריט צביעה, ובאפה ערב. פתוח מ-15:00 יומי, באפה 17:30-20:30. 📍 Jostalstraße 60, Titisee-Neustadt.',
+    note:'Jostalstraße 60 · פתוח 15:00 · ידידותי לילדים · 15-30€',
+    url:'https://www.jostalstueble.de/', urlLabel:'Jostalstüble'
+  },
+  // ── אזור טיטיזה ──────────────────────────────────────────────
+  {
+    id:'r-3', name:'Ristorante Mona Lisa – הפיצה הכי טובה', area:'אזור טיטיזה',
+    coords:[47.9047,8.1476], cuisine:'איטלקי', price:'€€',
+    desc:'הפיצה הכי טובה ביער השחור – ממליצים ישראלים רבים! מסעדה איטלקית אותנטית שפועלת על ידי משפחת דנארו (איטלקים במקור). פיצה, פסטה, Piccata Milanese – הכל טרי ומהיר. אווירה אינטימית וחמה ממש ליד האגם. מרוצה מהשירות. 📍 Seestr. 21, Titisee-Neustadt. פתוח כל יום 12:00–21:30 (מטבח עד 21:00), סגור ביום רביעי. הזמנות בטלפון בלבד.',
+    note:'Seestr. 21 · 12–21:30 · סגור רביעי · הזמינו בטלפון',
+    url:'https://mona-lisa-titisee.de/', urlLabel:'Mona Lisa – אתר'
+  },
+  {
+    id:'r-4', name:'Kuckucksstube – בדן מודרני בתחנה הישנה', area:'אזור טיטיזה',
+    coords:[47.9049,8.1520], cuisine:'בדני אזורי מודרני', price:'€€–€€€',
+    desc:'מסעדה מסוגנת ומיוחדת ב-Coucou Hotel, בתוך בניין תחנת הרכבת ההיסטורית של טיטיזה (1887, מוגן כאתר!). אוכל בדני-אזורי עם גרסאות טבעוניות וללא-גלוטן. אווירה חמה ומיוחדת עם תנור ישן ומרפסת חורף. 📍 Parkstr. 11, Titisee. שעות: ב-ו 18:00-22:00, שבת-ראשון 12:00-22:00.',
+    note:'Parkstr. 11 · שבת-ראשון 12–22 · תחנה ישנה · מיוחד',
+    url:'https://coucou-hotel.de/en/kuckucksstube', urlLabel:'Kuckucksstube'
+  },
+  // ── פארק אירופה (Rust) ────────────────────────────────────────
+  {
+    id:'r-5', name:'FoodLoop – מנות בשקופיות', area:'פארק אירופה (Rust)',
+    coords:[48.2672,7.7237], cuisine:'בינלאומי / מהיר', price:'€€',
+    desc:'חוויית אכילה ייחודית בפנים פארק אירופה! מזמינים אוכל דרך מסך מגע וסלילי השקופיות מעבירים את המנות אל שולחנכם בקצב – 200 מושבים מחוברים לרשת. ילדים משתגעים מזה! האוכל עצמו בינוני-טוב, אבל החוויה שלמה. מתאים לארוחת צהריים קצרה בפארק.',
+    note:'בתוך Europa-Park · חוויה ייחודית · ארוחת צהריים בפארק',
+    url:'https://www.europapark.de/en/theme-park/gastronomy/foodloop', urlLabel:'FoodLoop'
+  },
+  {
+    id:'r-6', name:'Pizzeria de Romantica – ב-Europa-Park', area:'פארק אירופה (Rust)',
+    coords:[48.2660,7.7220], cuisine:'איטלקי / פיצה', price:'€€',
+    desc:'מסעדת פיצה איטלקית פופולרית באזור מלוני פארק אירופה – אחת מהאופציות הטעימות ביותר שם ואחת הפופולריות בקרב ישראלים. פיצות, פסטות, סלטים בסביבה נוחה. ניתן להיכנס גם ללא הזמנת חדר במלון. מומלץ להזמין מקום מראש, במיוחד בעונת שיא.',
+    note:'אזור מלוני Europa-Park · מומלץ מאוד ישראלים · הזמינו מראש',
+    url:'https://www.europapark.de/en/overnight/gastronomy/restaurants', urlLabel:'מסעדות Europa-Park'
+  },
+  // ── אזור Schluchsee ───────────────────────────────────────────
+  {
+    id:'r-7', name:'Bootshaus Schluchsee – ארוחה על האגם', area:'אזור Schluchsee',
+    coords:[47.8180,8.1780], cuisine:'גרמני / Tarte Flambée / גריל', price:'€€',
+    desc:'מסעדה ובר ישירות על שפת אגם Schluchsee – נוף עוצר נשימה! ⭐ Tarte Flambée היא ההמלצה מספר 1 – פיצה אלזסית דקה ומוקפת בצל וקרם. גם מנות גריל ומנות עיקריות גרמניות. ישיבה חיצונית רחבה עם גינה ירוקה. מגרש משחקים ממש ליד לילדים. מתאים לארוחת צהריים בין הפעילויות על האגם.',
+    note:'על שפת האגם · Tarte Flambée מומלצת · ישיבה חיצונית',
+    url:'https://www.schluchsee.de/en/', urlLabel:'Schluchsee – מידע'
+  },
+  // ── ליד Waldshut-Tiengen ──────────────────────────────────────
+  {
+    id:'r-8', name:'Brauhaus Waldshut – בירריית הכפר', area:'ליד Waldshut-Tiengen',
+    coords:[47.6239,8.2131], cuisine:'גרמני / בירריית כפר', price:'€€',
+    desc:'בירריה מקומית אותנטית ב-Waldshut עם אוכל גרמני קלאסי: Bratwurst, Schnitzel, Flammkuchen ובירה מקומית מהחבית. אווירה כפרית ונוחה, ידידותית למשפחות. ה"מקום שבו מקומיים אוכלים" – בלי תיירות, בלי מחירי יוקרה. מתאים לארוחת ערב אחרי יום טיול ארוך.',
+    note:'Waldshut · שניצל + בירה מהחבית · ידידותי למשפחות',
+    url:'https://www.waldshut-tiengen.de/', urlLabel:'Waldshut-Tiengen'
+  },
+  {
+    id:'r-9', name:'Restaurants Bad Säckingen – גשר + אוכל', area:'ליד Waldshut-Tiengen',
+    coords:[47.5539,7.9446], cuisine:'מגוון / גרמני / מסעדות ריין', price:'€€',
+    desc:'Bad Säckingen (15 דקות מהמלון) היא עיירה ציורית עם מגוון מסעדות לאורך גדות הריין ובמרכז ההיסטורי. מסעדות ריין עם תפריטי דגים ואוכל גרמני, קפה ועוגות בסמטאות ההיסטוריות. שילוב מצוין: לבקר בגשר העץ הארוך בעולם ואחר-כך ארוחה ליד הנהר.',
+    note:'~15 דק\' מהמלון · מסעדות ריין מגוונות · שלב עם גשר הריין',
+    url:'https://www.bad-saeckingen.de/tourismus', urlLabel:'Bad Säckingen'
   }
 ];
 
@@ -1119,6 +1202,28 @@ OPTIONAL.forEach(o=>{
   allMks.push({m, dayIds:'optional', type:'optional', optId:o.id});
 });
 
+// ── Restaurant markers (hidden by default) ──
+RESTAURANTS.forEach(r=>{
+  const cfg=T.restaurant;
+  const pop=`
+  <div class="pop">
+    <div class="pop-head" style="background:${cfg.color}">
+      <div class="pop-type">🍽 מסעדה · ${r.cuisine} · ${r.price}</div>
+      <div class="pop-name">${r.name}</div>
+    </div>
+    <div class="pop-body">
+      <div class="pop-meta"><span>📂 ${r.area}</span></div>
+      <div class="pop-desc">${r.desc}</div>
+      <a class="pop-link" style="background:${cfg.color}" href="${r.url}" target="_blank"
+         onclick="event.stopPropagation()">🌐 ${r.urlLabel}</a>
+    </div>
+  </div>`;
+  const m=L.marker(r.coords,{icon:mkIcon('restaurant',32),zIndexOffset:50,opacity:0.12})
+    .bindPopup(pop,{maxWidth:300}).addTo(map);
+  if(m._icon) m._icon.style.pointerEvents='none';
+  allMks.push({m, dayIds:'restaurant', type:'restaurant', restId:r.id});
+});
+
 // ── Route lines (starts from hotel) ──
 function drawRoute(dayId){
   clearRoutes();
@@ -1137,12 +1242,14 @@ function filterMks(dayId){
   allMks.forEach(({m,dayIds,type,hotelIdx})=>{
     let show;
     if(dayId==='all'){
-      show = type!=='optional';
+      show = type!=='optional' && type!=='restaurant';
     } else if(dayId==='opt'){
       show = type==='hotel' || type==='optional';
+    } else if(dayId==='rest'){
+      show = type==='hotel' || type==='restaurant';
     } else {
-      if(type==='hotel')     show = (hotelIdx === DAYS[dayId].hotel);
-      else if(type==='optional') show = false;
+      if(type==='hotel')      show = (hotelIdx === DAYS[dayId].hotel);
+      else if(type==='optional' || type==='restaurant') show = false;
       else show = Array.isArray(dayIds) && dayIds.includes(dayId);
     }
     m.setOpacity(show?1:0.12);
@@ -1227,6 +1334,15 @@ DAYS.forEach(d=>{
   t.onclick=()=>selDay('opt');
   tabsWrap.appendChild(t);
 }
+// Restaurants tab
+{
+  const t=document.createElement('div');
+  t.className='tab rest-tab';
+  t.textContent='🍽 מסעדות';
+  t.title='מסעדות מומלצות';
+  t.onclick=()=>selDay('rest');
+  tabsWrap.appendChild(t);
+}
 
 // ── Select day ──
 function selDay(dayId){
@@ -1242,8 +1358,13 @@ function selDay(dayId){
     clearRoutes(); filterMks('opt');
     map.flyTo([47.92,8.25],9,{duration:1});
     renderOptional();
+  } else if(dayId==='rest'){
+    document.querySelector('.rest-tab')?.classList.add('on');
+    clearRoutes(); filterMks('rest');
+    map.flyTo([47.92,8.25],9,{duration:1});
+    renderRestaurants();
   } else {
-    const tabs=[...document.querySelectorAll('.tab:not(.all-tab):not(.opt-tab)')];
+    const tabs=[...document.querySelectorAll('.tab:not(.all-tab):not(.opt-tab):not(.rest-tab)')];
     if(tabs[dayId]) tabs[dayId].classList.add('on');
     drawRoute(dayId); filterMks(dayId); fitDay(dayId);
     renderDay(dayId);
@@ -1281,6 +1402,37 @@ function focusOptional(optId){
   if(!o) return;
   map.setView(o.coords,13,{animate:true});
   allMks.forEach(({m,optId:mid})=>{ if(mid===optId) m.openPopup(); });
+}
+
+// ── Render restaurants sidebar ──
+function renderRestaurants(){
+  const byArea={};
+  RESTAURANTS.forEach(r=>{ (byArea[r.area]=byArea[r.area]||[]).push(r); });
+  document.getElementById('panel').innerHTML=`
+    <div class="day-hdr">
+      <div class="dh-date">🍽 מסעדות מומלצות</div>
+      <div class="dh-title">איפה לאכול ביער השחור?</div>
+      <span class="dh-hotel">לחץ על מסעדה לפרטים במפה</span>
+    </div>
+    ${Object.entries(byArea).map(([area,items])=>`
+      <div style="font-size:10px;font-weight:700;color:#d84315;
+                  padding:8px 6px 4px;letter-spacing:.4px;text-transform:uppercase">${area}</div>
+      ${items.map(r=>`
+        <div class="act restaurant" onclick="focusRestaurant('${r.id}')">
+          <div class="act-ico">🍽</div>
+          <div style="flex:1">
+            <div class="act-name">${r.name}</div>
+            <div class="act-note">${r.cuisine} · ${r.price} · ${r.note}</div>
+          </div>
+        </div>`).join('')}`).join('')}`;
+}
+
+// ── Focus restaurant marker on map ──
+function focusRestaurant(restId){
+  const r=RESTAURANTS.find(x=>x.id===restId);
+  if(!r) return;
+  map.setView(r.coords,14,{animate:true});
+  allMks.forEach(({m,restId:mid})=>{ if(mid===restId) m.openPopup(); });
 }
 
 // ── Init ──
