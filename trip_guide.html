@@ -705,9 +705,9 @@ const RESTAURANTS = [
   {
     id:'r-10', name:'Bella Italia טודנאו', area:'טודנאו',
     coords:[47.8208,8.0258], cuisine:'איטלקי', price:'€€',
-    desc:'מסעדה איטלקית – פיצות ופסטות טובות, דגים, בשר וקינוחים.',
+    desc:'מסעדה איטלקית מומלצת באזור מגלשות טודנאו, מגישה מנות גדולות וטעימות. מגוון אוכל איטלקי איכותי: פיצות, פסטות, דגים, בשר, מרקים וקינוחים.',
     note:'Feldbergstraße 2, 79674 Todtnau',
-    url:'', urlLabel:''
+    url:'http://www.bella-italia-todtnau.de', urlLabel:'Bella Italia'
   },
   {
     id:'r-11', name:'Hotel Engel – מסעדת מלון', area:'טודנאו',
@@ -720,8 +720,8 @@ const RESTAURANTS = [
   {
     id:'r-12', name:'Seehof – מסעדה אירופאית', area:'אזור Schluchsee',
     coords:[47.8133,8.1775], cuisine:'אירופאי', price:'€€',
-    desc:'מסעדת Seehof – אוכל אירופאי ליד אגם שלוכזה.',
-    note:'Kirchsteige 4, 79859 Schluchsee',
+    desc:'מקום נגיש ומומלץ על שפת אגם שלוכזה, עם מרפסת שמש גדולה הצופה ישירות למים. אוכל אירופאי קלאסי באווירה שקטה ונעימה.',
+    note:'Fischbacher Str. 7, 79859 Schluchsee',
     url:'', urlLabel:''
   },
   {
@@ -768,10 +768,10 @@ const RESTAURANTS = [
     url:'', urlLabel:''
   },
   {
-    id:'r-19', name:'Pferdestall – איטלקי-גרמני ✓ גלוטן', area:'אזור טיטיזה',
-    coords:[47.9044,8.1472], cuisine:'איטלקי-גרמני / ידידותי לגלוטן', price:'€€',
-    desc:'Pferdestall – מסעדה איטלקית-גרמנית עם מודעות לגלוטן. מתאים לרגישויות מזון.',
-    note:'Seestr. 11, 79822 Titisee-Neustadt',
+    id:'r-19', name:'Pferdestall – מסעדת ספורט ואורווה', area:'אזור טיטיזה',
+    coords:[47.9044,8.1472], cuisine:'גרמני / בשרים / סטייקים', price:'€€',
+    desc:'מוסד ותיק בטיטיזה. עיצוב כפרי של אורווה לשעבר, אווירה נהדרת ותפריט מגוון של בשרים, סטייקים ומאכלים מקומיים.',
+    note:'Seestr. 34, 79822 Titisee-Neustadt',
     url:'', urlLabel:''
   },
   {
@@ -962,6 +962,159 @@ const RESTAURANTS = [
     coords:[48.0795,7.3582], cuisine:'קונדיטוריה / מאפייה', price:'€',
     desc:'קונדיטוריה Gilg – קונדיטוריה ומאפייה מסורתית בקולמאר באלזס.',
     note:'60 Grand Rue, 68000 Colmar, France',
+    url:'', urlLabel:''
+  },
+  // ── אזור טיטיזה (מ-PDF goblackforest) ──────────────────────
+  {
+    id:'r-45', name:'Gasthaus Heiligenbrunnen', area:'אזור טיטיזה',
+    coords:[47.8990,8.1650], cuisine:'גרמני מסורתי', price:'€€',
+    desc:'בית אירוח גרמני מסורתי קרוב לטיטיזה. מנות שחורצוואלד קלאסיות, אווירה אותנטית שלווה.',
+    note:'Heiligbrunnenstr. 36, 79822 Titisee-Neustadt',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-46', name:'Pizzeria Rusticana טיטיזה', area:'אזור טיטיזה',
+    coords:[47.9042,8.1460], cuisine:'איטלקי / פיצה', price:'€€',
+    desc:'פיצרייה איטלקית מרכזית בטיטיזה, ממוקמת ברחוב הראשי. פיצות ופסטות טריות.',
+    note:'Hauptstr. 1, 79822 Titisee-Neustadt',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-47', name:'Aroma Garden – סיני טיטיזה', area:'אזור טיטיזה',
+    coords:[47.9055,8.1500], cuisine:'סיני', price:'€€',
+    desc:'מסעדה סינית בטיטיזה, אפשרות טובה למשפחות המחפשות מגוון. תפריט סיני מלא.',
+    note:'Titiseestraße 17, 79822 Titisee-Neustadt',
+    url:'', urlLabel:''
+  },
+  // ── הינטרצרטן / Breitnau (מ-PDF goblackforest) ──────────────
+  {
+    id:'r-48', name:'Leonardo Da Vinci הינטרצרטן', area:'הינטרצרטן / Breitnau',
+    coords:[47.8917,8.0244], cuisine:'איטלקי', price:'€€',
+    desc:'מסעדה איטלקית במרכז הינטרצרטן, מגישה פסטות ופיצות איטלקיות קלאסיות. קרוב לכיכר הראטהאוס.',
+    note:'Rathausstraße 1, 79856 Hinterzarten',
+    url:'', urlLabel:''
+  },
+  // ── טודנאו (מ-PDF goblackforest) ────────────────────────────
+  {
+    id:'r-49', name:'Haus Tannenberg – פנינה קולינרית', area:'טודנאו',
+    coords:[47.8305,8.0415], cuisine:'גרמני / בינלאומי', price:'€€€',
+    desc:'פנינה קולינרית בטודנאוברג – מסעדה יוקרתית יחסית עם חוויה גסטרונומית מיוחדת. מומלץ להזמין מקום מראש!',
+    note:'Rüttestraße 44, 79674 Todtnauberg · הזמנה מראש חובה',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-50', name:'Bäckerei Gutmann טודנאו', area:'טודנאו',
+    coords:[47.8210,8.0258], cuisine:'מאפייה / קפה', price:'€',
+    desc:'מאפייה מקומית בטודנאו לארוחת בוקר או חטיף. לחמים טריים, עוגות שחורצוואלד ומשקאות חמים.',
+    note:'Meinrad-Thoma-Str. 11, 79674 Todtnau',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-51', name:'Bäckerei Gutmann אוצנפלד', area:'טודנאו',
+    coords:[47.8025,7.9920], cuisine:'מאפייה / קפה', price:'€',
+    desc:'סניף נוסף של מאפיית Gutmann בכפר הקטן אוצנפלד. לחמים ומאפים טריים מדי בוקר.',
+    note:'Wiesentalstr. 15, 79694 Utzenfeld',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-52', name:'La Piazzetta – איטלקי וגלידה', area:'טודנאו',
+    coords:[47.8207,8.0260], cuisine:'איטלקי / גלידרייה / קפה', price:'€€',
+    desc:'מסעדה ובית קפה איטלקי בלב טודנאו. פסטות, פיצות, גלידה איטלקית ומשקאות. מתאים לביניים ואחרי טיול.',
+    note:'Friedrichstr. 13, 79674 Todtnau',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-53', name:'Cafe Restaurant Waldblick', area:'טודנאו',
+    coords:[47.8305,8.0440], cuisine:'גרמני / קפה', price:'€€',
+    desc:'בית קפה ומסעדה בטודנאוברג עם נוף ליער ולנוף שחורצוואלד. מתאים לאחר טיול בסביבה.',
+    note:'Schwimmbadweg 23, 79674 Todtnauberg',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-54', name:'Ryan Grill & Curry – הודי', area:'טודנאו',
+    coords:[47.8150,8.0350], cuisine:'הודי / קארי', price:'€€',
+    desc:'מסעדה הודית קרובה למגלשות חאזנהורן בטודנאו-הרנשוואנד. קארי, גריל הודי ואורז. מומלץ אחר הצהריים אחרי המגלשות.',
+    note:'Lindenstr. 6, Todtnau-Herrenschwand · קרוב למגלשות',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-55', name:'Hotel & Chalets Herrihof', area:'טודנאו',
+    coords:[47.8215,8.0262], cuisine:'גרמני / מסעדת מלון', price:'€€',
+    desc:'מסעדת מלון Herrihof בטודנאו. ארוחות גרמניות מסורתיות, מתאים גם לאורחים חיצוניים.',
+    note:'Kurhausstr. 21, 79674 Todtnau',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-56', name:'Dasrößle טודנאו', area:'טודנאו',
+    coords:[47.8220,8.0250], cuisine:'גרמני / שחורצוואלד', price:'€€',
+    desc:'מסעדה גרמנית מסורתית בטודנאו, מנות שחורצוואלד אותנטיות. מקום שקט ומיוחד.',
+    note:'Im Dürracker 3, 79674 Todtnau',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-57', name:'Gasthaus zum Lamm שלכטנאו', area:'טודנאו',
+    coords:[47.8280,8.0125], cuisine:'גרמני מסורתי', price:'€€',
+    desc:'בית מלון ומסעדה גרמנית כפרית בכפר שלכטנאו הקטן ליד טודנאו. מנות ציד, בשר ואוכל יומי מקומי.',
+    note:'Hauptstraße 5, Todtnau-Schlechtnau',
+    url:'', urlLabel:''
+  },
+  // ── פלדברג (מ-PDF goblackforest) ────────────────────────────
+  {
+    id:'r-58', name:'Da Rocco – איטלקי פלדברג', area:'פלדברג',
+    coords:[47.8745,8.0044], cuisine:'איטלקי', price:'€€',
+    desc:'מסעדה איטלקית בפלדברג בתוך מלון Schlehdorn. פסטות, פיצות ומנות ים בסביבת יער מקסימה.',
+    note:'Feldbergstraße 2, 79868 Feldberg (מלון Schlehdorn)',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-59', name:'Cafe Schwarzwaldmaidle – פלדברג', area:'פלדברג',
+    coords:[47.8650,7.9895], cuisine:'קפה / עוגות / שחורצוואלד', price:'€',
+    desc:'בית קפה בסגנון שחורצוואלד בבארנטל ליד פלדברג (שימו לב: סניף שונה מזה שבטיטיזה). עוגות שחורצוואלד ביתיות ומשקאות.',
+    note:'Ignaz-Gfell-Platz 2, 79868 Feldberg/Bärental',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-60', name:'Gasthof Waldvogel – ציד פלדברג', area:'פלדברג',
+    coords:[47.8600,8.0180], cuisine:'גרמני / ציד / בשר', price:'€€',
+    desc:'גסטהוף ציד ופלדברג מסורתי. מתמחה בבשר ציד מהיער – איל, חזיר בר וחיות יער אחרות. חוויה שחורצוואלד אותנטית.',
+    note:'Köpfleweg 25, 79868 Feldberg/Altglashütten',
+    url:'', urlLabel:''
+  },
+  // ── פרייבורג (מ-PDF goblackforest) ──────────────────────────
+  {
+    id:'r-61', name:'שוק האיכרים Münstermarkt', area:'פרייבורג',
+    coords:[47.9951,7.8520], cuisine:'שוק / רחוב / מקומי', price:'€',
+    desc:'שוק ירקות ואוכל מסביב לקתדרלת מינסטר בפרייבורג. מציע פירות, גבינות, ברזל ומוצרים מקומיים. פתוח בימי שוק (ב׳, ד׳, ו׳ וש׳).',
+    note:'Münsterplatz, 79098 Freiburg im Breisgau · שוק בוקר בימי ב׳/ד׳/ו׳/ש׳',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-62', name:'Yepa Yepa – מקסיקני פרייבורג', area:'פרייבורג',
+    coords:[48.0018,7.8468], cuisine:'מקסיקני', price:'€€',
+    desc:'מסעדה מקסיקנית בפרייבורג. טאקוס, בוריטוס, נאצ\'וס ומרגריטות. אופציה שונה ומהנה בעיר.',
+    note:'Merianstr. 30, 79104 Freiburg im Breisgau',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-63', name:'Die Bergstation – פסגת שאואינסלנד', area:'פרייבורג',
+    coords:[47.9070,7.9040], cuisine:'גרמני / קפה / ארוחת צהריים', price:'€€',
+    desc:'מסעדה ובית קפה בפסגת רכבל שאואינסלנד (1284 מ\'). נוף פנורמי מרהיב. מתאים לארוחת צהריים אחרי הטיפוס ברכבל.',
+    note:'Schauinslandstraße 390, 79254 Oberried (פסגת הרכבל)',
+    url:'', urlLabel:''
+  },
+  // ── לנצקירש (מ-PDF goblackforest) ───────────────────────────
+  {
+    id:'r-64', name:'Il Carpaccio – איטלקי לנצקירש', area:'לנצקירש',
+    coords:[47.8608,8.2008], cuisine:'איטלקי', price:'€€',
+    desc:'ריסטורנטה ופיצרייה איטלקית ליד פארק הקורורט בלנצקירש. מנות פסטה ופיצה טריות.',
+    note:'Am Kurpark 7, 79853 Lenzkirch',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-65', name:'Brauerei-Gasthof Rogg – מבשלה', area:'לנצקירש',
+    coords:[47.8605,8.2015], cuisine:'גרמני / בירה מקומית', price:'€€',
+    desc:'גסטהוף של מבשלת Rogg בלנצקירש. בירה מקומית מהחבית, מנות גרמניות מסורתיות. מקום מושלם לאחר טיול ביער.',
+    note:'Bonndorfer Str. 1, 79853 Lenzkirch',
     url:'', urlLabel:''
   }
 ];
