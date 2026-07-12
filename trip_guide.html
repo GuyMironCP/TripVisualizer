@@ -700,6 +700,269 @@ const RESTAURANTS = [
     desc:'Bad Säckingen (15 דקות מהמלון) היא עיירה ציורית עם מגוון מסעדות לאורך גדות הריין ובמרכז ההיסטורי. מסעדות ריין עם תפריטי דגים ואוכל גרמני, קפה ועוגות בסמטאות ההיסטוריות. שילוב מצוין: לבקר בגשר העץ הארוך בעולם ואחר-כך ארוחה ליד הנהר.',
     note:'~15 דק\' מהמלון · מסעדות ריין מגוונות · שלב עם גשר הריין',
     url:'https://www.bad-saeckingen.de/', urlLabel:'Bad Säckingen'
+  },
+  // ── טודנאו ──────────────────────────────────────────────────────
+  {
+    id:'r-10', name:'Bella Italia טודנאו', area:'טודנאו',
+    coords:[47.8208,8.0258], cuisine:'איטלקי', price:'€€',
+    desc:'מסעדה איטלקית – פיצות ופסטות טובות, דגים, בשר וקינוחים.',
+    note:'Feldbergstraße 2, 79674 Todtnau',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-11', name:'Hotel Engel – מסעדת מלון', area:'טודנאו',
+    coords:[47.8212,8.0254], cuisine:'גרמני מסורתי', price:'€€',
+    desc:'מסעדה במלון Hotel Engel – אוכל גרמני מסורתי ביער השחור.',
+    note:'Kurhausstraße 3, 79674 Todtnau · Alfred Boch eK',
+    url:'', urlLabel:''
+  },
+  // ── אזור Schluchsee (נוספים) ────────────────────────────────
+  {
+    id:'r-12', name:'Seehof – מסעדה אירופאית', area:'אזור Schluchsee',
+    coords:[47.8133,8.1775], cuisine:'אירופאי', price:'€€',
+    desc:'מסעדת Seehof – אוכל אירופאי ליד אגם שלוכזה.',
+    note:'Kirchsteige 4, 79859 Schluchsee',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-13', name:'Seecafe Ambiente – בית קפה', area:'אזור Schluchsee',
+    coords:[47.8120,8.1750], cuisine:'בית קפה', price:'€',
+    desc:'Seecafe Ambiente – בית קפה ומאפים ליד אגם שלוכזה.',
+    note:'Im Wolfsgrund 26, 79859 Schluchsee · Luise Dietrich',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-14', name:'Tannenmühle גרפנהאוזן', area:'אזור Schluchsee',
+    coords:[47.7833,8.3333], cuisine:'גרמני / כפרי', price:'€€',
+    desc:'מסעדת Tannenmühle – מסעדה כפרית ציורית ליד שביל הפסלים בגרפנהאוזן. מומלץ לאחר טיול באזור.',
+    note:'Tannenmühleweg 5, 79865 Grafenhausen',
+    url:'https://www.tannenmuehle.de/en', urlLabel:'Tannenmühle'
+  },
+  {
+    id:'r-15', name:'Schwarzwaldhaus – מסעדה אירופאית', area:'אזור Schluchsee',
+    coords:[47.8740,8.0055], cuisine:'אירופאי', price:'€€',
+    desc:'Schwarzwaldhaus – מסעדה אירופאית באזור פלדברג, קרוב לאגם שלוכזה.',
+    note:'Falkauer Str. 3, 79868 Feldberg',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-16', name:'Pizzeria La Piazza שלוכזה', area:'אזור Schluchsee',
+    coords:[47.8130,8.1770], cuisine:'איטלקי / פיצה', price:'€€',
+    desc:'Pizzeria la Piazza – מסעדה איטלקית ליד אגם שלוכזה.',
+    note:'Kirchplatz 4, 79859 Schluchsee',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-17', name:'Peperoncino לנצקירש', area:'אזור Schluchsee',
+    coords:[47.8610,8.2015], cuisine:'איטלקי', price:'€€',
+    desc:'Peperoncino – מסעדה איטלקית בלנצקירש, קרוב לאגם שלוכזה.',
+    note:'Im Angel 2, 79853 Lenzkirch',
+    url:'', urlLabel:''
+  },
+  // ── אזור טיטיזה (נוספים) ────────────────────────────────────
+  {
+    id:'r-18', name:'פיצריה פסרלה', area:'אזור טיטיזה',
+    coords:[47.9052,8.1480], cuisine:'איטלקי / פיצה', price:'€€',
+    desc:'פיצריה פסרלה – פיצות ואוכל איטלקי ממש ליד אגם טיטיזה.',
+    note:'Seestr. 23, 79822 Titisee-Neustadt',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-19', name:'Pferdestall – איטלקי-גרמני ✓ גלוטן', area:'אזור טיטיזה',
+    coords:[47.9044,8.1472], cuisine:'איטלקי-גרמני / ידידותי לגלוטן', price:'€€',
+    desc:'Pferdestall – מסעדה איטלקית-גרמנית עם מודעות לגלוטן. מתאים לרגישויות מזון.',
+    note:'Seestr. 11, 79822 Titisee-Neustadt',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-20', name:'קפה Bamby – בית קפה', area:'אזור טיטיזה',
+    coords:[47.9049,8.1520], cuisine:'בית קפה', price:'€',
+    desc:'קפה Bamby – בית קפה ומאפים ליד אגם טיטיזה.',
+    note:'Parkstraße 11, 79822 Titisee-Neustadt · Dirk Fischer',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-21', name:'Rice Man – מסעדה סינית', area:'אזור טיטיזה',
+    coords:[47.9047,8.1476], cuisine:'סיני / מהיר', price:'€',
+    desc:'Rice Man Schnellrestaurant – מסעדה סינית מהירה בטיטיזה.',
+    note:'Titisee-Neustadt',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-22', name:'Cafe Schwarzwaldmaidle', area:'אזור טיטיזה',
+    coords:[47.9055,8.1460], cuisine:'בית קפה / קונדיטוריה', price:'€',
+    desc:'Cafe Schwarzwaldmaidle – בית קפה וקונדיטוריה עם מאפים תוצרת בית בטיטיזה.',
+    note:'Pfauenstraße 14, 79822 Titisee-Neustadt · Bäckerei & Konditorei Fischer',
+    url:'', urlLabel:''
+  },
+  // ── הינטרצרטן / Breitnau ────────────────────────────────────
+  {
+    id:'r-23', name:'The Engel – מלון הינטרצרטן', area:'הינטרצרטן / Breitnau',
+    coords:[47.8917,8.0244], cuisine:'גרמני מסורתי', price:'€€',
+    desc:'The Engel במלון ENGEL בעיירה הינטרצרטן. מסעדה גרמנית מסורתית קרוב לקניון רוונה ושביל הגמד פלחטל.',
+    note:'Alpersbach 14, 79856 Hinterzarten · Klaus und Michaele Steiert',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-24', name:'Kaisers Tanne ברייטנאו', area:'הינטרצרטן / Breitnau',
+    coords:[47.9490,8.0450], cuisine:'גרמני', price:'€€',
+    desc:'מסעדת מלון Kaisers Tanne – מסעדה גרמנית בברייטנאו, קרוב למלון Hofgut Sternen.',
+    note:'Am Wirbstein 27, 79874 Breitnau · Ferienhotel Kaisers Tanne',
+    url:'', urlLabel:''
+  },
+  // ── גוטאך ───────────────────────────────────────────────────
+  {
+    id:'r-25', name:'Landgasthof Engel גוטאך', area:'גוטאך',
+    coords:[48.1650,8.1790], cuisine:'גרמני מסורתי', price:'€€',
+    desc:'Landgasthof Engel – אכסניית כפר גרמנית אותנטית בגוטאך, ארוחות גרמניות קלאסיות.',
+    note:'Steingrün 16, 77793 Gutach (Schwarzwaldbahn)',
+    url:'', urlLabel:''
+  },
+  // ── טריברג ──────────────────────────────────────────────────
+  {
+    id:'r-26', name:'Café Schaefer טריברג', area:'טריברג',
+    coords:[48.1283,8.1035], cuisine:'בית קפה / קונדיטוריה', price:'€',
+    desc:'Café Schaefer – בית קפה ידוע בטריברג, מומלץ לבקר אחרי המפלים.',
+    note:'Hauptstrasse 33, D-78098 Triberg',
+    url:'', urlLabel:''
+  },
+  // ── באד קרוצינגן ────────────────────────────────────────────
+  {
+    id:'r-27', name:'AMSELHOF פיצריה', area:'באד קרוצינגן',
+    coords:[47.9149,7.7076], cuisine:'פיצריה', price:'€€',
+    desc:'AMSELHOF – פיצריה בבאד קרוצינגן.',
+    note:'Kemsstr. 21, 79189 Bad Krozingen',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-28', name:'Z CAFE – בית קפה', area:'באד קרוצינגן',
+    coords:[47.9160,7.7085], cuisine:'בית קפה', price:'€',
+    desc:'Z CAFE – בית קפה בבאד קרוצינגן.',
+    note:'Staufener Str. 70, 79189 Bad Krozingen',
+    url:'', urlLabel:''
+  },
+  // ── פלדברג ──────────────────────────────────────────────────
+  {
+    id:'r-29', name:'Siner Zit – פיצריה בפלדברג', area:'פלדברג',
+    coords:[47.8745,8.0049], cuisine:'איטלקי / פיצה', price:'€€',
+    desc:'Siner Zit – מסעדה איטלקית בפלדברג, מנות טובות ותפריט ילדים. Restaurant Café Pizzeria.',
+    note:'Dr.-Pilet-Spur 1b, 79868 Feldberg',
+    url:'', urlLabel:''
+  },
+  // ── לנצקירש ─────────────────────────────────────────────────
+  {
+    id:'r-30', name:'LA-CARPACCIO לנצקירש', area:'לנצקירש',
+    coords:[47.8605,8.2010], cuisine:'איטלקי', price:'€€',
+    desc:'LA-CARPACCIO – מסעדה איטלקית בעיירה לנצקירש.',
+    note:'Schwarzwaldstr. 1, 79853 Lenzkirch · Nicola Brizzi',
+    url:'', urlLabel:''
+  },
+  // ── פארק אירופה / רוסט (נוספים) ────────────────────────────
+  {
+    id:'r-31', name:'Pizzeria-Ristorante Garibaldi', area:'פארק אירופה (Rust)',
+    coords:[48.2687,7.7254], cuisine:'איטלקי / פיצה', price:'€€',
+    desc:'Pizzeria-Ristorante Garibaldi – מסעדה איטלקית ברוסט, ממש ליד פארק אירופה.',
+    note:'Karl-Friedrich-Str. 2, 77977 Rust',
+    url:'', urlLabel:''
+  },
+  // ── פרייבורג ────────────────────────────────────────────────
+  {
+    id:'r-32', name:'Ristorante e Pizzeria Milano', area:'פרייבורג',
+    coords:[47.9964,7.8502], cuisine:'איטלקי / פיצה', price:'€€',
+    desc:'פיצה מילאנו – פיצרייה בעיר העתיקה של פרייבורג. 💡 טיפ: מומלץ לאכול בדוכני הנקניקיות בשוק!',
+    note:'Schusterstr. 7, 79098 Freiburg',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-33', name:'VAPIANO פרייבורג', area:'פרייבורג',
+    coords:[47.9977,7.8490], cuisine:'איטלקי / רשת', price:'€€',
+    desc:'VAPIANO – מסעדה איטלקית רשת בינלאומית עם פסטה ופיצה טריים.',
+    note:'Fahnenbergpl. 1, 79098 Freiburg im Breisgau',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-34', name:'Burger Chalet המבורגריה', area:'פרייבורג',
+    coords:[47.9960,7.8490], cuisine:'המבורגרים', price:'€€',
+    desc:'Burger Chalet – המבורגריה בפרייבורג.',
+    note:'Niemensstr. 9, 79098 Freiburg',
+    url:'', urlLabel:''
+  },
+  // ── שפהאוזן (מפלי הריין) ────────────────────────────────────
+  {
+    id:'r-35', name:'Abaco שפהאוזן', area:'שפהאוזן (מפלי הריין)',
+    coords:[47.6978,8.6348], cuisine:'בינלאומי', price:'€€',
+    desc:'Abaco – מסעדה מומלצת בשפהאוזן, ליד מפלי הריין.',
+    note:'Safrangasse 2, 8200 Schaffhausen',
+    url:'', urlLabel:''
+  },
+  // ── ברייסאך ─────────────────────────────────────────────────
+  {
+    id:'r-36', name:'ARARAT Holzofen ברייסאך', area:'ברייסאך',
+    coords:[48.0300,7.5770], cuisine:'ים תיכוני / תנור עצים', price:'€€',
+    desc:'ARARAT Holzofen – מטבח ים תיכוני עם תנור עצים בברייסאך. Inh. Yilmaz Ceken.',
+    note:'Rheinstr. 20, 79206 Breisach am Rhein',
+    url:'', urlLabel:''
+  },
+  // ── שטוטגרט ─────────────────────────────────────────────────
+  {
+    id:'r-37', name:'Block House שטוטגרט', area:'שטוטגרט',
+    coords:[48.7758,9.1829], cuisine:'אמריקאי / בשרי', price:'€€€',
+    desc:'Block House – מסעדה אמריקאית בשרית בשטוטגרט.',
+    note:'Eberhardstr. 10, 70173 Stuttgart',
+    url:'', urlLabel:''
+  },
+  // ── מירסבורג ────────────────────────────────────────────────
+  {
+    id:'r-38', name:'CAPRI DUE מירסבורג', area:'מירסבורג',
+    coords:[47.6939,9.2740], cuisine:'איטלקי', price:'€€',
+    desc:'CAPRI DUE – מסעדה איטלקית במירסבורג על אגם קונסטנץ.',
+    note:'Unterstadtstr. 10, 88709 Meersburg (Bodensee)',
+    url:'', urlLabel:''
+  },
+  // ── שטרסבורג (אלזס) ─────────────────────────────────────────
+  {
+    id:'r-39', name:'VAPIANO שטרסבורג', area:'שטרסבורג (אלזס)',
+    coords:[48.5823,7.7476], cuisine:'איטלקי / רשת', price:'€€',
+    desc:'VAPIANO – מסעדה איטלקית רשת בשטרסבורג.',
+    note:'2 Quai Kléber, 67000 Strasbourg, France',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-40', name:'Maison Tanneurs שטרסבורג', area:'שטרסבורג (אלזס)',
+    coords:[48.5784,7.7487], cuisine:'צרפתי', price:'€€€',
+    desc:'Maison tanneurs – מסעדה צרפתית אותנטית בשטרסבורג.',
+    note:'42 Rue du Bain aux Plantes, Strasbourg 67000 France',
+    url:'', urlLabel:''
+  },
+  // ── ריבווילה (אלזס) ─────────────────────────────────────────
+  {
+    id:'r-41', name:'Auberge au Zahnacker', area:'ריבווילה (אלזס)',
+    coords:[48.1946,7.3192], cuisine:'צרפתי', price:'€€€',
+    desc:'Auberge au Zahnacker – מסעדה צרפתית בריבווילה באלזס.',
+    note:'8 Avenue du General de Gaulle, 68150 Ribeauvillé, France',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-42', name:'Au Cheval Noir', area:'ריבווילה (אלזס)',
+    coords:[48.1944,7.3189], cuisine:'צרפתי-אירופאי', price:'€€',
+    desc:'Au Cheval Noir – מסעדה צרפתית אירופאית בריבווילה.',
+    note:'2 Avenue du General de Gaulle, 68150 Ribeauvillé, France',
+    url:'', urlLabel:''
+  },
+  // ── קולמאר (אלזס) ───────────────────────────────────────────
+  {
+    id:'r-43', name:'Djerba La Douce קולמאר', area:'קולמאר (אלזס)',
+    coords:[48.0785,7.3573], cuisine:'מרוקאי-טוניסאי', price:'€€',
+    desc:'Djerba La Douce – מסעדה מרוקאית-טוניסאית בקולמאר.',
+    note:'10 rue du Mouton, 68000 Colmar, France',
+    url:'', urlLabel:''
+  },
+  {
+    id:'r-44', name:'Gilg קונדיטוריה קולמאר', area:'קולמאר (אלזס)',
+    coords:[48.0795,7.3582], cuisine:'קונדיטוריה / מאפייה', price:'€',
+    desc:'קונדיטוריה Gilg – קונדיטוריה ומאפייה מסורתית בקולמאר באלזס.',
+    note:'60 Grand Rue, 68000 Colmar, France',
+    url:'', urlLabel:''
   }
 ];
 
