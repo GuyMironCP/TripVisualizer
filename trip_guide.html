@@ -106,8 +106,22 @@ html, body { height:100%; font-family:'Segoe UI', system-ui, sans-serif; overflo
 /* ─── Custom markers ─────────────────────────────────── */
 .mk { border-radius:50%; display:flex; align-items:center; justify-content:center;
       border:3px solid rgba(255,255,255,.95); box-shadow:0 2px 8px rgba(0,0,0,.4);
-      transition:transform .15s; cursor:pointer; font-size:15px; }
+      transition:transform .15s; cursor:pointer; font-size:15px; position:relative; }
 .mk:hover { transform:scale(1.18) !important; }
+.mk-card-badge {
+  position:absolute; top:-5px; right:-5px;
+  width:16px; height:16px; border-radius:50%;
+  background:#fff; border:2px solid #2e7d32;
+  display:flex; align-items:center; justify-content:center;
+  font-size:9px; box-shadow:0 1px 4px rgba(0,0,0,.35);
+  pointer-events:none; line-height:1;
+}
+.pop-card {
+  margin:8px 0 4px; padding:5px 10px;
+  background:#e8f5e9; color:#1b5e20;
+  border-radius:6px; font-size:11px; font-weight:700;
+  border-right:3px solid #2e7d32;
+}
 .mk.pulse { animation:pulse 1.6s infinite; }
 @keyframes pulse { 0%,100%{box-shadow:0 2px 8px rgba(0,0,0,.4);} 50%{box-shadow:0 0 0 6px rgba(45,106,45,.3),0 2px 8px rgba(0,0,0,.4);} }
 
@@ -398,7 +412,7 @@ const OPTIONAL = [
   },
   {
     id:'opt-1', name:'Hasenhorn Coaster – מגלשות הרים', type:'attraction',
-    category:'מגלשות הרים ואדרנלין',
+    category:'מגלשות הרים ואדרנלין', card:true, cardNote:'סיבוב אחד ביום חינם',
     coords:[47.8211,7.9345],
     desc:'Hasenhorn Rodelbahn בטודנאו – 3 קילומטרים של סיבובים, מהירות וירידה מטורפת בתוך מעמקי היער! עולים ברכבל קרסל ולמעלה מחכות מגלשות הרים מדהימות (Alpine Coaster – קרטים על מסילת פלדה) שיורדים על ההר עם נוף עצום לעמק. אחד הדברים הכי כיפיים ל-family בכל שחורצוואלד. כרטיס כניסה כולל רכבל + סיבוב מגלשות, ואפשר לרדת שוב ושוב. ⚠️ טיפ חשוב: הגיעו מוקדם בבוקר כדי להימנע מתורי ענק שיכולים להגיע לשעה ומעלה! כלול לרוב בכרטיסי הטבות אזוריים.',
     note:'~20 דק\' מהמלון Hofgut Sternen · הגיעו מוקדם! · סיבובים ברצון',
@@ -406,7 +420,7 @@ const OPTIONAL = [
   },
   {
     id:'opt-2', name:'Steinwasen Park', type:'attraction',
-    category:'פארקים ומשפחה',
+    category:'פארקים ומשפחה', card:true,
     coords:[47.9043,7.9344],
     desc:'Steinwasen Park הוא פארק משפחתי ייחודי בלב יער השחורצוואלד, ליד אוברריד (דרומית לפרייבורג). הפארק משלב חיות בר של האזור (זאבים, דובים, שועלים, אייל, חזיר בר, נשרים) עם אטרקציות פעילות: גשר חבלים תלוי ארוך (ה"Hängebrücke" – ממוקם על מצוק!), אינפרהרד מרתקת, ספינת פיראטים, גלגל-ענק ועוד. פארק שמספק לכל הגילאים – הילדים האקולוגים יאהבו את החיות, ובני הנוער יאהבו את האדרנלין.',
     note:'~15 דק\' מהמלון Hofgut Sternen · חיות בר + אדרנלין + ילדים',
@@ -430,7 +444,7 @@ const OPTIONAL = [
   },
   {
     id:'opt-5', name:'Schauinslandbahn – רכבל + מכרה', type:'attraction',
-    category:'ערים ותרבות',
+    category:'ערים ותרבות', card:true,
     coords:[47.9404,7.9092],
     desc:'Schauinslandbahn הוא אחד הרכבלים הארוכים בגרמניה – 3.6 ק"מ מהעמק לפסגה (1,284 מ\'). למעלה: נוף פנורמי עצום על פרייבורג, עמק הריין והאלפים ביום בהיר. ממש ליד תחנת העליון: מכרה כסף עתיק (Silberbergwerk) שפעל כ-800 שנה – סיור מודרך מרתק. כרטיס רכבל: ~17 אירו, מכרה: +8 אירו.',
     note:'~65 ק"מ מ-Waldshut-Tiengen · מתאים לשילוב עם יום פרייבורג',
@@ -541,7 +555,7 @@ const OPTIONAL = [
   },
   {
     id:'opt-18', name:'AquaFun Schluchsee – פארק מים קטן', type:'attraction',
-    category:'פארקי מים ואקווה',
+    category:'פארקי מים ואקווה', card:true,
     coords:[47.8175,8.1789],
     desc:'פארק מים קטן וחמוד על שפת האגם – מעולה למשפחות עם קטנטנים בימים חמים! מגלשות מים ישירות לתוך האגם, קירות טיפוס צפים, טרמפולינות ומכשולים מתנפחים על המים. כניסה ישירה לאגם לשחייה חופשית. מחיר סביר ואטמוספרה כפרית. חוויה שונה לגמרי מ-Rulantica – שחייה אמיתית באגם פסטורלי עם אטרקציות.',
     note:'~20 דק\' מ-Titisee · מגיל 3 · ~12-20 אירו · קיץ בלבד · מושלם לקטנים',
@@ -581,7 +595,7 @@ const OPTIONAL = [
   },
   {
     id:'opt-23', name:'Tatzmania – גן חיות + הרפתקאות', type:'attraction',
-    category:'פארקים ומשפחה',
+    category:'פארקים ומשפחה', card:true,
     coords:[48.2578,7.7856],
     desc:'Tatzmania בעיירת Löffingen – שילוב ייחודי של גן חיות, פארק שעשועים ופארק חבלים! חיות: זאבים, דובים, פומות, נמרים, נשרים. אזור הרפתקאות: פארק חבלים עם 40+ מסלולים, מגלשות ורוכסן. גן שעשועים לפעוטות. אטרקציה מאוד פופולרית בין משפחות עם ילדים – שווה יום שלם! ~50 דקות נסיעה מ-Breitnau (Hofgut Sternen), ~1:30 שעות מ-Waldshut. כרטיסים אונליין מוזל.',
     note:'~50 דק\' מ-Breitnau · ~35 אירו מבוגר, 28 ילד · יום שלם · הזמנה מראש',
@@ -760,6 +774,7 @@ const DAYS = [
         coords:[47.9064,8.1736], duration:'~3.5 שעות',
         desc:'פארק המים הגדול ביותר של שחורצוואלד – שתי דקות מ-Titisee! שלושה מתחמים: 🌴 הפארק הטרופי המפנק עם בר משקאות בתוך המים החמים, 🎢 פארק מגלשות מטורף לילדים עם עיקולים ואינסוף שחרורי אדרנלין, ו-🧖 מתחם סאונות שקט למבוגרים (כניסה בעירום/מגבת מגיל 16). מחיר כניסה: ~25–35 אירו. ⚠️ טיפ חשוב: שמרו היטב על הצמידים האלקטרוניים של הילדים – אובדן שלהם גורר קנס כבד!',
         note:'פארק מים – הגדול ב-Black Forest',
+        card:true, cardNote:'4 שעות · Galaxy / Palm Oasis בלבד',
         url:'https://www.badeparadies-schwarzwald.de/en/',
         urlLabel:'Badeparadies – אתר רשמי'
       },
@@ -828,6 +843,7 @@ const DAYS = [
         coords:[47.8211,7.9345], duration:'~2.5 שעות',
         desc:'Hasenhorn Rodelbahn הוא פארק כיף על ההר – עולים ברכבל קרסל ולמעלה מחכות מגלשות הרים מדהימות (קרטים על מסילה) שיורדים על ההר עם נוף עצום! אחד הדברים הכי כיפיים ל-family בכל שחורצוואלד. כרטיס כניסה כולל רכבל + סיבוב מגלשות. אפשר לעלות ולרדת כמה פעמים. יש גם שבילי הליכה למעלה עם נוף פנורמי.',
         note:'רכבל + מגלשות הרים · סיבובים ברצון',
+        card:true, cardNote:'סיבוב אחד ביום חינם',
         url:'https://www.hasenhorn-rodelbahn.de/en/',
         urlLabel:'Hasenhorn – אתר רשמי'
       },
@@ -836,6 +852,7 @@ const DAYS = [
         coords:[47.8211,7.9345], duration:'~1.5 שעות',
         desc:'Blackforestline הוא גשר חבלים תלוי מרהיב שנמתח בגובה עשרות מטרים מעל לעמק יער ומפלים. חציית הגשר היא חוויה אדרנלינית בלתי נשכחת! הגשר צר וזזים עליו בזה אחר זה. נוף מדהים לכל הכיוונים. מתאים לבני נוער ומבוגרים (מ-7 שנים בערך).',
         note:'אדרנלין! גובה עשרות מטרים',
+        card:true,
         url:'https://www.blackforestline.de/',
         urlLabel:'Blackforestline – אתר רשמי'
       },
@@ -879,6 +896,7 @@ const DAYS = [
         coords:[47.9024,8.1528], duration:'~3 שעות',
         desc:'Action Forest הוא פארק חבלים בין העצים (Kletterwald) הממוקם ממש ליד אגם Titisee! 5 מסלולי טיפוס מאתגרים בגבהים שונים בין צמרות העצים, כולם בבטיחות מלאה עם רתמות. הגובה מגיע ל-21 מ\' בין כתרי הכנפונים. זיפ-ליין מרגשות! מסלולים לכל הגילאים (גם לאיתי 11). מומלץ להזמין מראש באתר. לבוש: נעלי ספורט סגורות.',
         note:'6 מסלולים + זיפ-ליין · מגיל 6',
+        card:true,
         url:'https://www.action-forest.com/en/kletterwald/',
         urlLabel:'Action Forest – הזמן מקום'
       },
@@ -922,6 +940,7 @@ const DAYS = [
         coords:[48.1656,8.1933], duration:'~3 שעות',
         desc:'Vogtsbauernhof הוא מוזיאון פתוח מרתק – מתחם ענק עם חוות כפריות מקוריות מהמאות 16–19 שהועברו לכאן לשמירה. הסיור כולל: בתי חווה עתיקים, בעלי חיים (תרנגולות, כבשים, עיזים), הדגמות מלאכת יד עתיקה (נפחות, טחינת קמח, קדרות), לבוש מסורתי Black Forest. בנוסף: Gutach Sommerrodelbahn – מגלשות הרים צמודות! משחק קפיצה על קש וגינות. חינוכי ומשעשע.',
         note:'מוזיאון פתוח + מגלשות הרים Sommerrodelbahn',
+        card:true,
         url:'https://www.vogtsbauernhof.de/en/',
         urlLabel:'Vogtsbauernhof – אתר רשמי'
       },
@@ -1117,10 +1136,11 @@ const topo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 L.control.layers({'מפת רחובות':streets,'מפה טופוגרפית':topo}).addTo(map);
 
 // ── Build marker icon ──
-function mkIcon(type, sz=34) {
+function mkIcon(type, sz=34, card=false) {
   const cfg = T[type]||T.nature;
+  const badge = card ? '<div class="mk-card-badge">🎫</div>' : '';
   return L.divIcon({
-    html:`<div class="mk" style="width:${sz}px;height:${sz}px;background:${cfg.color}">${cfg.icon}</div>`,
+    html:`<div class="mk" style="width:${sz}px;height:${sz}px;background:${cfg.color}">${cfg.icon}${badge}</div>`,
     className:'', iconSize:[sz,sz], iconAnchor:[sz/2,sz/2], popupAnchor:[0,-sz/2-4]
   });
 }
@@ -1128,6 +1148,9 @@ function mkIcon(type, sz=34) {
 // ── Build popup HTML ──
 function buildPop(act, dayInfo) {
   const cfg = T[act.type]||T.nature;
+  const cardRow = act.card
+    ? `<div class="pop-card">🎫 כלול בכרטיס היער השחור${act.cardNote ? ' · '+act.cardNote : ''}</div>`
+    : '';
   return `
   <div class="pop">
     <div class="pop-head" style="background:${cfg.color}">
@@ -1139,6 +1162,7 @@ function buildPop(act, dayInfo) {
         <span>⏰ ${act.time}</span>
         <span>⏱ ${act.duration||'—'}</span>
       </div>
+      ${cardRow}
       <div class="pop-desc">${act.desc}</div>
       <a class="pop-link" style="background:${cfg.color}" href="${act.url}" target="_blank"
          onclick="event.stopPropagation()">🌐 ${act.urlLabel}</a>
@@ -1173,7 +1197,7 @@ HOTELS.forEach((h,hi)=>{
 DAYS.forEach(day=>{
   day.activities.forEach(act=>{
     if(act.type==='drive') return;
-    const m=L.marker(act.coords,{icon:mkIcon(act.type),zIndexOffset:100})
+    const m=L.marker(act.coords,{icon:mkIcon(act.type,34,act.card),zIndexOffset:100})
       .bindPopup(buildPop(act,day),{maxWidth:300})
       .addTo(map);
     allMks.push({m, dayIds:[day.id], type:act.type, act, day});
@@ -1183,6 +1207,9 @@ DAYS.forEach(day=>{
 // ── Optional attraction markers (hidden by default) ──
 OPTIONAL.forEach(o=>{
   const cfg=T[o.type]||T.nature;
+  const cardRow = o.card
+    ? `<div class="pop-card">🎫 כלול בכרטיס היער השחור${o.cardNote ? ' · '+o.cardNote : ''}</div>`
+    : '';
   const pop=`
   <div class="pop">
     <div class="pop-head" style="background:${cfg.color}">
@@ -1191,12 +1218,13 @@ OPTIONAL.forEach(o=>{
     </div>
     <div class="pop-body">
       <div class="pop-meta"><span>📂 ${o.category}</span></div>
+      ${cardRow}
       <div class="pop-desc">${o.desc}</div>
       <a class="pop-link" style="background:${cfg.color}" href="${o.url}" target="_blank"
          onclick="event.stopPropagation()">🌐 ${o.urlLabel}</a>
     </div>
   </div>`;
-  const m=L.marker(o.coords,{icon:mkIcon(o.type,32),zIndexOffset:50,opacity:0.12})
+  const m=L.marker(o.coords,{icon:mkIcon(o.type,32,o.card),zIndexOffset:50,opacity:0.12})
     .bindPopup(pop,{maxWidth:300}).addTo(map);
   if(m._icon) m._icon.style.pointerEvents='none';
   allMks.push({m, dayIds:'optional', type:'optional', optId:o.id});
