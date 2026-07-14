@@ -162,6 +162,7 @@ html, body { height:100%; font-family:'Segoe UI', system-ui, sans-serif; overflo
   #app { padding-bottom:56px; }
   .btn-mode { font-size:10px; padding:5px 10px; }
   #btn-cal-desktop { display:none; }
+  #btn-book-desktop { display:none; }
   .act-name { font-size:12px; }
   .act-note { font-size:10px; }
 }
@@ -254,6 +255,40 @@ html, body { height:100%; font-family:'Segoe UI', system-ui, sans-serif; overflo
 .btn-mode.online { background:#2e7d32; border-color:#66bb6a; }
 .btn-mode.loading { opacity:.65; cursor:wait; pointer-events:none; }
 
+/* ─── Booking badges ────────────────────────────────── */
+.book-tag { display:inline-block; margin-top:3px; font-size:9px; font-weight:700;
+            border-radius:4px; padding:1px 6px; margin-left:3px; }
+.book-tag.required    { color:#b71c1c; background:#ffebee; border:1px solid #ef9a9a; }
+.book-tag.recommended { color:#e65100; background:#fff3e0; border:1px solid #ffcc80; }
+.book-tag.optional    { color:#1565c0; background:#e3f2fd; border:1px solid #90caf9; }
+.detail-book-link { display:inline-block; padding:8px 18px; border-radius:8px;
+                    color:#fff !important; font-size:12px; font-weight:700;
+                    text-decoration:none !important; transition:opacity .15s; margin-top:6px; margin-left:6px; }
+.detail-book-link:hover { opacity:.85; }
+
+/* ─── Booking panel ──────────────────────────────────── */
+#booking-panel { display:none; flex:1; flex-direction:column; overflow:hidden; }
+#booking-panel.open { display:flex; }
+.bp-head { padding:10px 14px; background:#c62828; color:#fff; font-size:12px;
+           font-weight:700; flex-shrink:0; }
+.bp-list { flex:1; overflow-y:auto; }
+.bp-section { padding:6px 12px 4px; font-size:9px; font-weight:700;
+              text-transform:uppercase; letter-spacing:.5px; color:#888;
+              background:#f7faf7; border-bottom:1px solid #eee; }
+.bp-section.required-hd    { background:#fff5f5; color:#c62828; }
+.bp-section.recommended-hd { background:#fffbf0; color:#e65100; }
+.bp-section.optional-hd    { background:#f0f5ff; color:#1565c0; }
+.bp-item { padding:10px 12px; border-bottom:1px solid #f0f4f0; }
+.bp-item-day { font-size:9px; color:#aaa; margin-bottom:2px; }
+.bp-item-name { font-size:12px; font-weight:700; color:#1a1a1a; margin-bottom:5px; line-height:1.3; }
+.bp-book-btn { display:inline-block; font-size:10px; font-weight:700; color:#fff !important;
+               border-radius:6px; padding:4px 12px; text-decoration:none !important;
+               transition:opacity .15s; }
+.bp-book-btn:hover { opacity:.82; }
+.bp-book-btn.req { background:#c62828; }
+.bp-book-btn.rec { background:#e65100; }
+.bp-book-btn.opt { background:#1565c0; }
+
 /* ─── Distance badge on drive cards ────────────────── */
 .dist-badge { display:inline-block; background:rgba(84,110,122,.1);
               border:1px solid rgba(84,110,122,.22); border-radius:8px;
@@ -312,6 +347,7 @@ html, body { height:100%; font-family:'Segoe UI', system-ui, sans-serif; overflo
   </div>
   <button class="btn-mode" id="btn-online" onclick="toggleOnline()">⚡ מצב אונליין</button>
   <button class="btn-mode" id="btn-cal-desktop" onclick="switchView(currentView==='cal'?'map':'cal')">📅 לוח שנה</button>
+  <button class="btn-mode" id="btn-book-desktop" onclick="switchView(currentView==='book'?'map':'book')">🎟 הזמינו</button>
 </div>
 
 <div id="content">
@@ -322,6 +358,10 @@ html, body { height:100%; font-family:'Segoe UI', system-ui, sans-serif; overflo
       <div class="tab all-tab on" onclick="selDay('all')">כל הימים</div>
     </div>
     <div id="panel"></div>
+    <div id="booking-panel">
+      <div class="bp-head">🎟 אטרקציות – הזמינו מראש!</div>
+      <div id="bp-list" class="bp-list"></div>
+    </div>
     <div id="legend">
       <div class="leg"><div class="leg-dot" style="background:var(--c-nature)"></div>טבע / הליכה</div>
       <div class="leg"><div class="leg-dot" style="background:var(--c-lake)"></div>אגמים / שחייה</div>
@@ -358,6 +398,10 @@ html, body { height:100%; font-family:'Segoe UI', system-ui, sans-serif; overflo
   <button class="tab-btn" id="tbtn-cal" onclick="switchView('cal')">
     <span>📅</span>
     <span class="tab-lbl">לוח שנה</span>
+  </button>
+  <button class="tab-btn" id="tbtn-book" onclick="switchView(currentView==='book'?'map':'book')">
+    <span>🎟</span>
+    <span class="tab-lbl">הזמינו</span>
   </button>
 </div>
 
@@ -412,6 +456,9 @@ const OPTIONAL = [
     coords:[48.2672,7.7233],
     desc:'Rulantica הוא פארק המים הגדול והחדש ביותר בגרמניה, שנפתח ב-2019 ממש ליד Europa-Park ב-Rust. פארק ענק עם 17 מגלשות מים, ים גלים, בריכות ג\'קוזי, נהר עצלנים ואטמוספרת "עולם צפוני" מקסימה. ניתן לשלב עם יום Europa-Park – הפארקים ממוקמים זה לצד זה וכרטיסים משותפים זמינים.',
     note:'ממש ליד Europa-Park · Rust · ~55 דק\' ממלון Hofgut Sternen',
+    bookAdvance:true, bookUrgency:'recommended',
+    bookUrl:'https://www.europapark.de/en/rulantica/tickets-offers/tickets-offers',
+    bookLabel:'הזמן כרטיסי Rulantica',
     url:'https://www.rulantica.de/en/', urlLabel:'Rulantica – אתר רשמי'
   },
   {
@@ -556,6 +603,9 @@ const OPTIONAL = [
     desc:'פארק חבלים מעולה וחדש על מדרונות הפלדברג – ההר הגבוה בשחורצוואלד! מסלולים מאתגרים בגבהים שונים בין עצי האשוח הענקיים, מתאים לילדים מגובה 110 ס"מ ועד מבוגרים. גשרי חבלים, מסלולי זיפ-ליין, "נדנדת טרזן" ועוד. גובה האתר (~1200מ\') מוסיף לתחושת האדרנלין. אפשר לשלב עם עלייה ב-Feldbergbahn ואחר-כך ירידה ברגל. ⚠️ מומלץ מאוד להזמין מקום מראש עוד מהארץ – האתר מתמלא!',
     note:'מגובה 110 ס"מ · הזמינו מראש מהארץ!',
     card:true, cardNote:'כניסה חינם עם כרטיס יער השחור!',
+    bookAdvance:true, bookUrgency:'recommended',
+    bookUrl:'https://fundorena.de/en/homepage/',
+    bookLabel:'הזמן Kletterwald Feldberg',
     url:'https://fundorena.de/en/homepage/', urlLabel:'Fundorena – Kletterwald Feldberg'
   },
   {
@@ -601,6 +651,9 @@ const OPTIONAL = [
   {
     id:'opt-23', name:'Tatzmania – גן חיות + הרפתקאות', type:'attraction',
     category:'פארקים ומשפחה', card:true,
+    bookAdvance:true, bookUrgency:'optional',
+    bookUrl:'https://tatzmania-loeffingen.ticketbro.com/en-US',
+    bookLabel:'הזמן Tatzmania',
     coords:[48.2578,7.7856],
     desc:'Tatzmania בעיירת Löffingen – שילוב ייחודי של גן חיות, פארק שעשועים ופארק חבלים! חיות: זאבים, דובים, פומות, נמרים, נשרים. אזור הרפתקאות: פארק חבלים עם 40+ מסלולים, מגלשות ורוכסן. גן שעשועים לפעוטות. אטרקציה מאוד פופולרית בין משפחות עם ילדים – שווה יום שלם! ~50 דקות נסיעה מ-Breitnau (Hofgut Sternen), ~1:30 שעות מ-Waldshut. כרטיסים אונליין מוזל.',
     note:'~50 דק\' מ-Breitnau · ~35 אירו מבוגר, 28 ילד · יום שלם · הזמנה מראש',
@@ -617,6 +670,9 @@ const OPTIONAL = [
   {
     id:'opt-25', name:'Lindt Home of Chocolate – ציריך', type:'attraction',
     category:'ערים ותרבות',
+    bookAdvance:true, bookUrgency:'required',
+    bookUrl:'https://tickets.lindt-home-of-chocolate.com/',
+    bookLabel:'הזמן כרטיסי Lindt Chocolate',
     coords:[47.3490,8.5140],
     desc:'מוזיאון השוקולד של Lindt ליד ציריך – חוויה לכל הגילאים וחובה לכל חובב שוקולד! המוזיאון הענק כולל: מגדל הפונטן הגדול בעולם של שוקולד נוזלי (9 מטרים!), תערוכה אינטראקטיבית על 500 שנות היסטוריה של שוקולד, סדנת הכנת שוקולד (booking נפרד), וחנות ענקית של Lindt. מומלץ מאוד לשלב עם ביום ה-11 (יום הטיסה חזרה) – ~30 דקות מנמל התעופה ציריך. כרטיסים אונליין.',
     note:'~30 דק\' מ-ZRH · ~16 אירו מבוגר, 9 ילד · ~2 שעות · מומלץ ביום הטיסה',
@@ -1196,6 +1252,9 @@ const DAYS = [
         desc:'פארק המים הגדול ביותר של שחורצוואלד – שתי דקות מ-Titisee! שלושה מתחמים: 🌴 הפארק הטרופי המפנק עם בר משקאות בתוך המים החמים, 🎢 פארק מגלשות מטורף לילדים עם עיקולים ואינסוף שחרורי אדרנלין, ו-🧖 מתחם סאונות שקט למבוגרים (כניסה בעירום/מגבת מגיל 16). מחיר כניסה: ~25–35 אירו. ⚠️ טיפ חשוב: שמרו היטב על הצמידים האלקטרוניים של הילדים – אובדן שלהם גורר קנס כבד!',
         note:'פארק מים – הגדול ב-Black Forest',
         card:true, cardNote:'4 שעות · Galaxy / Palm Oasis בלבד',
+        bookAdvance:true, bookUrgency:'required',
+        bookUrl:'https://www.badeparadies-schwarzwald.de/en/shop/mtp/funnel-entrance.php',
+        bookLabel:'הזמן כרטיסים – Badeparadies',
         url:'https://www.badeparadies-schwarzwald.de/en/',
         urlLabel:'Badeparadies – אתר רשמי'
       },
@@ -1227,6 +1286,9 @@ const DAYS = [
         coords:[48.2660,7.7222], duration:'~8.5 שעות (עד 17:30)',
         desc:'Europa-Park הוא פארק השעשועים הגדול בגרמניה והשני בגדולה באירופה אחרי דיסנילנד. 100+ אטרקציות, 18 "מדינות" אירופה, הצגות ואירועים. הייטלייטים לבני נוער: Blue Fire (רכבת הרים עם רצועת להבות!), Silver Star (הרכבת הגבוהה ביותר), Voletarium (טיסה מדומה עם VR), Arthur in the Minimoys Kingdom, Euro-Mir. כניסה: ~60 אירו למבוגר, פחות לילדים. כדאי להזמין מראש אונליין!',
         note:'הזמן כרטיסים מראש! · פתוח 9:00–18:00',
+        bookAdvance:true, bookUrgency:'recommended',
+        bookUrl:'https://tickets.mackinternational.de/en/category/europapark-tickets',
+        bookLabel:'הזמן כרטיסי Europa-Park',
         url:'https://www.europapark.de/en',
         urlLabel:'Europa-Park – אתר רשמי'
       },
@@ -1289,6 +1351,9 @@ const DAYS = [
         desc:'Blackforestline הוא גשר חבלים תלוי מרהיב שנמתח בגובה עשרות מטרים מעל לעמק יער ומפלים. חציית הגשר היא חוויה אדרנלינית בלתי נשכחת! הגשר צר וזזים עליו בזה אחר זה. נוף מדהים לכל הכיוונים. מתאים לבני נוער ומבוגרים (מ-7 שנים בערך).',
         note:'אדרנלין! גובה עשרות מטרים',
         card:true,
+        bookAdvance:true, bookUrgency:'recommended',
+        bookUrl:'https://tickets.blackforestline.de/',
+        bookLabel:'הזמן Blackforestline',
         url:'https://www.blackforestline.de/',
         urlLabel:'Blackforestline – אתר רשמי'
       },
@@ -1333,6 +1398,9 @@ const DAYS = [
         desc:'Action Forest הוא פארק חבלים בין העצים (Kletterwald) הממוקם ממש ליד אגם Titisee! 5 מסלולי טיפוס מאתגרים בגבהים שונים בין צמרות העצים, כולם בבטיחות מלאה עם רתמות. הגובה מגיע ל-21 מ\' בין כתרי הכנפונים. זיפ-ליין מרגשות! מסלולים לכל הגילאים (גם לאיתי 11). מומלץ להזמין מראש באתר. לבוש: נעלי ספורט סגורות.',
         note:'6 מסלולים + זיפ-ליין · מגיל 6',
         card:true,
+        bookAdvance:true, bookUrgency:'required',
+        bookUrl:'https://www.action-forest.com/reservierung/',
+        bookLabel:'הזמן Action Forest',
         url:'https://www.action-forest.com/en/kletterwald/',
         urlLabel:'Action Forest – הזמן מקום'
       },
@@ -1460,6 +1528,9 @@ const DAYS = [
         coords:[47.6769,8.6142], duration:'~3 שעות',
         desc:'מפלי הריין (Rheinfall) הם המפלים החזקים ביותר באירופה ומהציוותניים בעולם! רוחב: 150 מ\', גובה: 23 מ\'. אפשר לראות את המפלים מנקודות תצפית חינמיות בשני צדי הנהר, ומטירת לאופן (כרטיס ~5 CHF). האטרקציה הכי מומלצת: סיור בסירה לסלע המרכזי (~30 דק\', ~6 CHF) – תחושה בלתי נשכחת מהמים המתנפצים מסביב! יש גם Adventure Park חבלים ליד למי שרוצה עוד אדרנלין. מגרש משחקים לאיתי.',
         note:'שיט לסלע המרכזי – חובה! · ~6 CHF',
+        bookAdvance:true, bookUrgency:'recommended',
+        bookUrl:'https://tix.rhyfall-maendli.ch/',
+        bookLabel:'הזמן שיט Rhine Falls',
         url:'https://www.rhinefalls.com/en/',
         urlLabel:'Rhine Falls – אתר רשמי'
       },
@@ -1870,6 +1941,7 @@ function renderOptional(){
           <div style="flex:1">
             <div class="act-name">${o.name}</div>
             ${o.card?`<span class="card-tag">🎫 כרטיס יער השחור${o.cardNote?' · '+o.cardNote:''}</span>`:''}
+            ${o.bookAdvance?`<span class="book-tag ${o.bookUrgency||'recommended'}">${o.bookUrgency==='required'?'⚠️ חובה להזמין':'🎟 הזמן מראש'}</span>`:''}
             <div class="act-note">${o.note||''}</div>
           </div>
         </div>`;
@@ -2176,6 +2248,7 @@ function renderDay(dayId){
           <div class="act-time">${a.time}${a.duration?` · ${a.duration}`:''}${dist}<span id="wbadge-${dayId}-${i}"></span></div>
           <div class="act-name">${a.name}</div>
           ${a.card?`<span class="card-tag">🎫 כרטיס יער השחור${a.cardNote?' · '+a.cardNote:''}</span>`:''}
+          ${a.bookAdvance?`<span class="book-tag ${a.bookUrgency||'recommended'}">${a.bookUrgency==='required'?'⚠️ חובה להזמין':'🎟 הזמן מראש'}</span>`:''}
           <div class="act-note">${a.note||''}</div>
         </div>
       </div>`;
@@ -2189,11 +2262,53 @@ function renderDay(dayId){
 // ════════════════════════════════════════════════════════════════
 let currentView = 'map';
 
+function renderBookingPanel(){
+  const list = document.getElementById('bp-list');
+  if(!list) return;
+  const items = [];
+  DAYS.forEach(day=>{
+    day.activities.forEach(a=>{
+      if(a.bookAdvance) items.push({name:a.name, day:`יום ${day.id+1} · ${day.date} · ${day.dow}`, urgency:a.bookUrgency||'recommended', url:a.bookUrl, label:a.bookLabel});
+    });
+  });
+  OPTIONAL.forEach(o=>{
+    if(o.bookAdvance) items.push({name:o.name, day:'אטרקציה אופציונלית', urgency:o.bookUrgency||'recommended', url:o.bookUrl, label:o.bookLabel});
+  });
+  const order={required:0,recommended:1,optional:2};
+  items.sort((a,b)=>(order[a.urgency]||1)-(order[b.urgency]||1));
+  const sectionLabels={required:'⚠️ חובה – עלולים לא להיכנס בלי הזמנה', recommended:'🎟 מומלץ מאוד – עלול להיות מלא', optional:'💡 כדאי – חוסך תור ומוזל'};
+  const sectionClass={required:'required-hd', recommended:'recommended-hd', optional:'optional-hd'};
+  const btnClass={required:'req', recommended:'rec', optional:'opt'};
+  let html='';
+  ['required','recommended','optional'].forEach(u=>{
+    const group=items.filter(i=>i.urgency===u);
+    if(!group.length) return;
+    html+=`<div class="bp-section ${sectionClass[u]}">${sectionLabels[u]}</div>`;
+    group.forEach(item=>{
+      html+=`<div class="bp-item">
+        <div class="bp-item-day">${item.day}</div>
+        <div class="bp-item-name">${item.name}</div>
+        ${item.url?`<a class="bp-book-btn ${btnClass[u]}" href="${item.url}" target="_blank">🎟 הזמן עכשיו</a>`:''}
+      </div>`;
+    });
+  });
+  list.innerHTML = html;
+}
+
 function switchView(v) {
   currentView = v;
-  document.getElementById('content').style.display = v==='map' ? 'flex' : 'none';
+  const cont = document.getElementById('content');
   const calEl = document.getElementById('cal-view');
+  const panel = document.getElementById('panel');
+  const bookPanel = document.getElementById('booking-panel');
+  cont.style.display = v==='map' ? 'flex' : 'none';
   calEl.style.display = v==='cal' ? 'flex' : 'none';
+  if(panel) panel.style.display = v==='book'?'none':'';
+  if(bookPanel){ bookPanel.classList.toggle('open', v==='book'); if(v==='book') renderBookingPanel(); }
+  const bookBtn = document.getElementById('btn-book-desktop');
+  if(bookBtn) bookBtn.classList.toggle('on', v==='book');
+  const tbBook = document.getElementById('tbtn-book');
+  if(tbBook) tbBook.classList.toggle('on', v==='book');
   const tbMap = document.getElementById('tbtn-map');
   const tbCal = document.getElementById('tbtn-cal');
   const dtBtn = document.getElementById('btn-cal-desktop');
@@ -2258,7 +2373,8 @@ function showCalDetail(dayId, actIdx) {
       <div class="detail-meta">⏰ ${a.time}${a.duration?' · ⏱ '+a.duration:''} <span id="${wbId}"></span></div>
       ${a.note ? `<div class="detail-note">📌 ${a.note}</div>` : ''}
       <div class="detail-desc">${a.desc}</div>
-      ${a.url ? `<a class="detail-link" style="background:${cfg.color}" href="${a.url}" target="_blank">🌐 ${a.urlLabel}</a>` : ''}`;
+      ${a.url ? `<a class="detail-link" style="background:${cfg.color}" href="${a.url}" target="_blank">🌐 ${a.urlLabel}</a>` : ''}
+      ${a.bookAdvance && a.bookUrl ? `<a class="detail-book-link" style="background:${a.bookUrgency==='required'?'#c62828':'#e65100'}" href="${a.bookUrl}" target="_blank">🎟 ${a.bookLabel||'הזמן כרטיסים'}</a>` : ''}`;
     if(onlineMode) {
       fetchWeather(a.coords[0],a.coords[1]).then(({d1,d2,elev})=>{
         const iso=TRIP_ISO[dayId];
